@@ -41,7 +41,7 @@ SCOPES=(
 	"$DOTUSR/bin"
 )
 
-for SCOPE in "${SCOPES[@]}"; do
+for SCOPE in ${SCOPES[@]}; do
 	TARGET="$SCOPE/git-$1"
 
 	if [[ -f "$TARGET" ]] && [[ -x "$TARGET" ]]; then
