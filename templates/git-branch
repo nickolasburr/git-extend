@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+###
+### git-branch: Add convenience options to git-branch(1).
+###
+
+ERR_NOTREPO="Not a Git repository."
+ERR_NO_PREV_BRANCH="No previous branch found."
+
+if [[ ! "$(git rev-parse --is-inside-work-tree)" ]] 2>/dev/null; then
+	printf '%s\n' "$ERR_NOTREPO"
+
+	exit 1
+fi
+
+ARGV=()
+
+while [[ $# -gt 0 ]]; do
+	case $1 in
+		--last|-L)
+			git check-ref-format --branch @{-1} 2>/dev/null
+
+			if [[ $? -gt 0 ]]; then
+				printf '%s\n' "$ERR_NO_PREV_BRANCH"
+
+				exit 1
+			fi
+
+			exit 0
+		;;
+		*)
+			ARGV+=("$1")
+
+			shift
+		;;
+	esac
+done
+
+git branch "${ARGV[@]}"

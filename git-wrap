@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+
+###
+### git-wrap: Personalize Git builtins with command wrappers.
+###
+
+PREFIX="/usr/local"
+BINDIR="$PREFIX/bin"
+BYPASS=0
+GIT="$BINDIR/git"
+
+case $1 in
+	--bypass|-b)
+		shift
+
+		BYPASS=1
+	;;
+esac
+
+# Bypass wrappers if --bypass was given.
+if [[ $BYPASS -eq 1 ]]; then
+	exec $GIT "$@"
+
+	exit $?
+fi
+
+# If $TLPID is already set, pass to git.
+if [[ -n $TLPID ]] && [[ $TLPID -eq $PPID ]]; then
+	unset TLPID
+
+	exec $GIT "$@"
+
+	exit $?
+fi
+
+# Top-level PID.
+export TLPID="$$"
+
+# Scoped search paths.
+SCOPES=(
+	"$DOTUSR/bin"
+)
+
+for SCOPE in "${SCOPES[@]}"; do
+	TARGET="$SCOPE/git-$1"
+
+	if [[ -f "$TARGET" ]] && [[ -x "$TARGET" ]]; then
+		shift
+
+		exec $TARGET "$@"
+
+		exit $?
+	fi
+done
+
+exec $GIT "$@"
