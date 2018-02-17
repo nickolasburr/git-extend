@@ -10,5 +10,5 @@ if [[ ! -d "$PREFIX" ]]; then
 	exit 1
 fi
 
-SOURCE="git-wrap"
+SOURCE="git-extend"
 TARGET="git"

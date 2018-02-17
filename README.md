@@ -1,6 +1,6 @@
-# git-wrap(1)
+# git-extend(1)
 
-`git-wrap` is an executable wrapper for Git.
+`git-extend` is an executable wrapper for Git.
 
 ## Table of Contents
 
@@ -12,26 +12,26 @@
 
 ## Installation
 
-You can install `git-wrap` via Homebrew or manually.
+You can install `git-extend` via Homebrew or manually.
 
 ### Homebrew
 
 ```
 brew tap nickolasburr/pfa
-brew install git-wrap
+brew install git-extend
 ```
 
 ### Manual
 
 ```
-git clone https://github.com/nickolasburr/git-wrap.git
+git clone https://github.com/nickolasburr/git-extend.git
 make
 make install
 ```
 
 ## Options
 
-+ `--bypass`, `-b`: Bypass all `git-wrap` command wrappers.
++ `--bypass`, `-b`: Bypass all `git-extend` command wrappers.
 
 ## Templates
 
