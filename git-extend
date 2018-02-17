@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ###
-### git-wrap: Personalize Git builtins with command wrappers.
+### git-extend: Extend Git with command wrappers.
 ###
 
 PREFIX="/usr/local"
