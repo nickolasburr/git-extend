@@ -62,4 +62,4 @@ while [[ $# -gt 0 ]]; do
 	esac
 done
 
-git add "${ARGV[@]}" "${FILES[@]}"
+$GIT add "${ARGV[@]}" "${FILES[@]}"

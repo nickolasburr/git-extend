@@ -66,4 +66,4 @@ while [[ $# -gt 0 ]]; do
 	esac
 done
 
-git log "${ARGV[@]}"
+$GIT log "${ARGV[@]}"

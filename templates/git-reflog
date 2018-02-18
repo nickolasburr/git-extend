@@ -65,4 +65,4 @@ while [[ $# -gt 0 ]]; do
 	esac
 done
 
-git reflog show "${ARGV[@]}"
+$GIT reflog show "${ARGV[@]}"
