@@ -8,22 +8,25 @@ BYPASS=0
 PREFIX="/usr/local"
 BINDIR="$PREFIX/bin"
 GIT="$BINDIR/git"
+ARGV=()
 
-case $1 in
-	--bypass|-b)
-		shift
+for ARG in ${@}; do
+	case $ARG in
+		--bypass|-b)
+			BYPASS=1
+		;;
+		*)
+			ARGV+=("$ARG")
+		;;
+	esac
+done
 
-		BYPASS=1
-	;;
-esac
+# Reset $@ without git-extend(1) options.
+set -- "${ARGV[@]}"
+unset ARGV
+unset ARG
 
-echo "\$@: $@"
-
-# If $TLPID is set and holds $PPID,
-# unset $TLPID and update $BYPASS.
 if [[ -n $TLPID ]] && [[ $TLPID -eq $PPID ]]; then
-	unset TLPID
-
 	BYPASS=1
 fi
 
