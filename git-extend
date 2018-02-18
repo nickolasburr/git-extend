@@ -10,7 +10,7 @@ BINDIR="$PREFIX/bin"
 GIT="$BINDIR/git"
 ARGV=()
 
-for ARG in ${@}; do
+for ARG in "$@"; do
 	case $ARG in
 		--bypass|-b)
 			BYPASS=1
@@ -44,19 +44,24 @@ SCOPES="$(echo $PATH | tr ':' '\n')"
 
 for PATHNAME in ${SCOPES[@]}; do
 	ARGV=("$@")
+	COUNT=0
 
 	while [[ ${#ARGV[@]} -gt 0 ]]; do
 		TARGET="$PATHNAME/git-${ARGV[0]}"
 
 		if [[ -f "$TARGET" ]] && [[ -x "$TARGET" ]]; then
-			ARGV=("${ARGV[@]:1}")
+			# Executable path with git(1) options, arguments (e.g. '/usr/bin/git -C ~/project').
+			# $GIT should be called from within the command wrappers to ensure proper handling.
+			export GIT="$GIT ${@:1:COUNT}"
 
-			exec $TARGET "${ARGV[@]}"
+			# Execute $TARGET with command-specific arguments only.
+			exec $TARGET "${ARGV[@]:1}"
 
 			exit $?
 		fi
 
 		ARGV=("${ARGV[@]:1}")
+		let "COUNT++"
 	done
 done
 
