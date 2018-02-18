@@ -12,7 +12,7 @@ ARGV=()
 
 for ARG in "$@"; do
 	case $ARG in
-		--bypass|-b)
+		--bypass)
 			BYPASS=1
 		;;
 		*)
