@@ -4,30 +4,33 @@
 ### git-extend: Extend Git with command wrappers.
 ###
 
+BYPASS=0
 PREFIX="/usr/local"
 BINDIR="$PREFIX/bin"
-BYPASS=0
 GIT="$BINDIR/git"
+ARGV=()
 
-case $1 in
-	--bypass|-b)
-		shift
+for ARG in "$@"; do
+	case $ARG in
+		--bypass|-b)
+			BYPASS=1
+		;;
+		*)
+			ARGV+=("$ARG")
+		;;
+	esac
+done
 
-		BYPASS=1
-	;;
-esac
+# Reset $@ without git-extend(1) options.
+set -- "${ARGV[@]}"
+unset ARGV
+unset ARG
 
-# Bypass wrappers if --bypass was given.
-if [[ $BYPASS -eq 1 ]]; then
-	exec $GIT "$@"
-
-	exit $?
+if [[ -n $TLPID ]] && [[ $TLPID -eq $PPID ]]; then
+	BYPASS=1
 fi
 
-# If $TLPID is already set, pass to git.
-if [[ -n $TLPID ]] && [[ $TLPID -eq $PPID ]]; then
-	unset TLPID
-
+if [[ $BYPASS -eq 1 ]]; then
 	exec $GIT "$@"
 
 	exit $?
@@ -36,21 +39,30 @@ fi
 # Top-level PID.
 export TLPID="$$"
 
-# Scoped search paths.
-SCOPES=(
-	"$DOTUSR/bin"
-)
+# Pathnames from $PATH.
+SCOPES="$(echo $PATH | tr ':' '\n')"
 
-for SCOPE in ${SCOPES[@]}; do
-	TARGET="$SCOPE/git-$1"
+for PATHNAME in ${SCOPES[@]}; do
+	ARGV=("$@")
+	COUNT=0
 
-	if [[ -f "$TARGET" ]] && [[ -x "$TARGET" ]]; then
-		shift
+	while [[ ${#ARGV[@]} -gt 0 ]]; do
+		TARGET="$PATHNAME/git-${ARGV[0]}"
 
-		exec $TARGET "$@"
+		if [[ -f "$TARGET" ]] && [[ -x "$TARGET" ]]; then
+			# Executable path with git(1) options, arguments (e.g. '/usr/bin/git -C ~/project').
+			# $GIT should be called from within the command wrappers to ensure proper handling.
+			export GIT="$GIT ${@:1:COUNT}"
 
-		exit $?
-	fi
+			# Execute $TARGET with command-specific arguments only.
+			exec $TARGET "${ARGV[@]:1}"
+
+			exit $?
+		fi
+
+		ARGV=("${ARGV[@]:1}")
+		let "COUNT++"
+	done
 done
 
 exec $GIT "$@"

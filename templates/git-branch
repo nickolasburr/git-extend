@@ -36,4 +36,4 @@ while [[ $# -gt 0 ]]; do
 	esac
 done
 
-git branch "${ARGV[@]}"
+$GIT branch "${ARGV[@]}"
