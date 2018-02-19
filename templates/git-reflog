@@ -28,19 +28,19 @@ ARGV=(
 
 while [[ $# -gt 0 ]]; do
 	case $1 in
-		-h|--help)
+		--help|-h)
 			git reflog --help
 
 			exit 0
 		;;
-		-A|--all)
+		--all)
 			shift
 
 			ARGV+=("--max-count=$TOTAL")
 
 			shift
 		;;
-		-L|--last)
+		--last)
 			shift
 
 			NUM="$1"
