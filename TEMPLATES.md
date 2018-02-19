@@ -1,7 +1,11 @@
-# git-extend(1) Templates
+# Command Wrapper Templates
 
-+ **Default** options are Git builtin options given to `git` via the command wrapper. You can add/modify/remove them to your liking.
-+ **Wrapper** options are user-defined options which augment input given to `git` via the command wrapper. Make sure to use unique option names to avoid potential conflicts.
+## Option Types
+
++ **Default:**
+  -- Git builtin options given to `git` via the command wrapper. You can add/modify/remove them to your liking.
++ **Wrapper:**
+  -- User-defined options which augment input given to `git` via the command wrapper. Use unique option names to avoid conflicts.
 
 ## Pre-built Templates
 
@@ -20,17 +24,16 @@
 git add %1
 ```
 
+---
+
 ### `git-branch`
 
-#### Options
+#### _Options_
 
-**Default**
-
-_none_
-
-**Wrapper**
-
-+ `--last`, `-L`: Get the name of the last branch.
++ **Default**
+  - _none_
++ **Wrapper**
+  - `--last`, `-L`: Get the name of the last branch.
 
 **Usage:**
 
@@ -39,22 +42,21 @@ git branch --last
 # -> fix/bug
 ```
 
+---
+
 ### `git-log`
 
-#### Options
+#### _Options_
 
-**Default**
-
-+ `--graph`
-+ `--abbrev-commit`
-+ `--date=relative`
-+ `--format="%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset"`
-+ `--max-count=10`
-
-**Wrapper**
-
-+ `--all`: Get all commits (overrides initial `--max-count=$NUM`).
-+ `--last`: Get last `n` commits (overrides initial `--max-count=$TOTAL`).
++ **Default**
+  - `--graph`
+  - `--abbrev-commit`
+  - `--date=relative`
+  - `--format="%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset"`
+  - `--max-count=10`
++ **Wrapper**
+  - `--all`: Get all commits (overrides initial `--max-count=$NUM`).
+  - `--last`: Get last `n` commits (overrides initial `--max-count=$TOTAL`).
 
 **Usage:**
 
@@ -62,21 +64,20 @@ git branch --last
 git log --last 15
 ```
 
+---
+
 ### `git-reflog`
 
-#### Options
+#### _Options_
 
-**Default**
-
-+ `--abbrev-commit`
-+ `--date=relative`
-+ `--format="%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset"`
-+ `--max-count=10`
-
-**Wrapper**
-
-+ `--all`: Get all commits (overrides initial `--max-count=$NUM`).
-+ `--last`: Get last `n` commits (overrides initial `--max-count=$TOTAL`).
++ **Default**
+  - `--abbrev-commit`
+  - `--date=relative`
+  - `--format="%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset"`
+  - `--max-count=10`
++ **Wrapper**
+  - `--all`: Get all commits (overrides initial `--max-count=$NUM`).
+  - `--last`: Get last `n` commits (overrides initial `--max-count=$TOTAL`).
 
 **Usage:**
 
