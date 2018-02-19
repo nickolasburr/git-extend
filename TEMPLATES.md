@@ -1,11 +1,13 @@
 # Command Wrapper Templates
 
+Below is a list of pre-built command wrappers that illustrate how `git-extend` works. You can find them in the [templates](https://github.com/nickolasburr/git-extend/tree/master/templates) directory.
+
 ## Option Types
 
 + **Default:**
-  -- Git builtin options given to `git` via the command wrapper. You can add/modify/remove them to your liking.
+  - Git builtin options given to `git` via the command wrapper. You can add/modify/remove them to your liking.
 + **Wrapper:**
-  -- User-defined options which augment input given to `git` via the command wrapper. Use unique option names to avoid conflicts.
+  - User-defined options which augment input given to `git` via the command wrapper. Use unique option names to avoid conflicts.
 
 ## Pre-built Templates
 
