@@ -34,14 +34,14 @@ while [[ $# -gt 0 ]]; do
 
 			exit 0
 		;;
-		--all|-a)
+		--all)
 			shift
 
 			ARGV+=("--max-count=$TOTAL")
 
 			shift
 		;;
-		--last|-l)
+		--last)
 			shift
 
 			NUM="$1"
