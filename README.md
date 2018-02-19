@@ -40,11 +40,11 @@ make install
 
 ## Templates
 
-Templates are provided for several porcelain commands, including:
+Command wrapper templates are provided for several porcelain commands, including:
 
 + `git-add`
 + `git-branch`
 + `git-log`
 + `git-reflog`
 
-See [TEMPLATES.md](https://github.com/nickolasburr/git-extend/blob/master/TEMPLATES.md) for a list of available templates and explanations of what each template offers.
+See [TEMPLATES](https://github.com/nickolasburr/git-extend/blob/master/TEMPLATES.md) for the complete list of pre-built command wrapper templates.
