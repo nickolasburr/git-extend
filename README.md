@@ -12,11 +12,11 @@
   + [Manual](#manual)
 - [Options](#options)
 - [Examples](#examples)
-- [Wrappers](#wrappers)
+- [Command Wrappers](#command-wrappers)
 
 ## Description
 
-`git-extend` extends Git builtins via command wrappers. It is intended for the individual who wants to use Git builtins organically, with a tinge of customization.
+`git-extend` extends Git builtins via [command wrappers](#command-wrappers). It is intended for the individual who wants to use Git builtins organically, with a tinge of customization.
 
 ## Purpose
 
@@ -38,7 +38,7 @@ A few important caveats to consider prior to installation:
 
 + When adding options to a command wrapper, make sure the builtin doesn't have an equivalent option. This will cause conflicts otherwise.
 + When in doubt, use `--bypass`. See [Examples](#examples) for `--bypass` usage.
-+ *Always* test command wrappers somewhere safe before using them in your workflow. If you don't, bad things _will_ happen.
++ **Always** test command wrappers somewhere safe before using them in your workflow. If you don't, bad things _will_ happen.
 
 ## Installation
 
@@ -58,6 +58,19 @@ git clone https://github.com/nickolasburr/git-extend.git
 make
 make install
 ```
+
+The installation directory is represented by `$PREFIX`, and defaults to `/usr/local`. The following files are installed in `$PREFIX`:
+
++ `$PREFIX/bin/git-extend`
++ `$PREFIX/share/man/man1/git-extend.1.gz`
+
+You can install to an alternate location by passing `PREFIX` to `make install`. For example, `make install PREFIX=$HOME/.usr`.
+
+Additionally, the following files are symlinked in `$PREFIX`:
+
++ `$PREFIX/bin/git-extend` -> `$PREFIX/bin/git`
+
+<strong>Important</strong>: If a `git` executable is encountered during `make install`, the process will fail. This will happen if you have Git installed at `$PREFIX/bin/git`. In this event, run `make uninstall` and use `PREFIX` to specify an alternate location, then add that pathname to the beginning of your `$PATH`.
 
 ## Options
 
@@ -99,13 +112,15 @@ make install
     git --bypass log --max-count=5
     ```
 
-## Wrappers
+## Command Wrappers
 
-Command wrapper templates are provided for several porcelain commands, including:
+Command wrappers are executable scripts with the same name as a Git builtin. For example, `git-log` for `git log`, `git-add` for `git add`, and so on.
+
+Templates are provided for several porcelain commands, including:
 
 + `git-add`
 + `git-branch`
 + `git-log`
 + `git-reflog`
 
-See [TEMPLATES](https://github.com/nickolasburr/git-extend/blob/master/TEMPLATES.md) for the complete list of pre-built command wrapper templates.
+See [TEMPLATES](https://github.com/nickolasburr/git-extend/blob/master/TEMPLATES.md) for a complete list of pre-built command wrapper templates.
