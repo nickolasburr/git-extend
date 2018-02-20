@@ -1,6 +1,6 @@
 # git-extend(1)
 
-`git-extend` is a lightweight wrapper for Git builtins.
+`git-extend` is a lightweight wrapper utility for Git builtins.
 
 ## Table of Contents
 
@@ -12,7 +12,7 @@
   + [Manual](#manual)
 - [Options](#options)
 - [Examples](#examples)
-- [Templates](#templates)
+- [Wrappers](#wrappers)
 
 ## Description
 
@@ -71,6 +71,22 @@ Get the name of the previous branch (assumes pre-built command wrapper for `git-
 git branch --last
 ```
 
+Excerpt from `git-branch` wrapper:
+
+```
+--last|-L)
+  git check-ref-format --branch @{-1} 2>/dev/null
+
+  if [[ $? -gt 0 ]]; then
+    printf '%s\n' "$ERR_NO_PREV_BRANCH"
+
+    exit 1
+  fi
+
+  exit 0
+;;
+```
+
 Add the first pathspec in the list derived from `git-status` (assumes pre-built command wrapper for `git-add`).
 
 ```
@@ -83,7 +99,7 @@ Bypass `git-extend` and get the last five log entries.
 git --bypass log --max-count=5
 ```
 
-## Templates
+## Wrappers
 
 Command wrapper templates are provided for several porcelain commands, including:
 
