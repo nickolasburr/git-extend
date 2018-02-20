@@ -28,7 +28,7 @@ You may be asking yourself:
 
 > What advantages does git-extend provide that I can't get from git-config? Or from a shell alias?
 
-In short, intuitiveness.
+In short, convenience and intuitiveness.
 
 What `git-extend` provides is integration of your own options around Git builtins. Rather than having to define and remember an alias for, say, `git-log`, you customize the wrapper to your liking and add the helper options you feel benefit you the most.
 
@@ -75,15 +75,15 @@ Excerpt from `git-branch` wrapper:
 
 ```
 --last|-L)
-  git check-ref-format --branch @{-1} 2>/dev/null
+	git check-ref-format --branch @{-1} 2>/dev/null
 
-  if [[ $? -gt 0 ]]; then
-    printf '%s\n' "$ERR_NO_PREV_BRANCH"
+	if [[ $? -gt 0 ]]; then
+		printf '%s\n' "$ERR_NO_PREV_BRANCH"
 
-    exit 1
-  fi
+		exit 1
+	fi
 
-  exit 0
+	exit 0
 ;;
 ```
 
