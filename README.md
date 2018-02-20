@@ -65,39 +65,39 @@ make install
 
 ## Examples
 
-Get the name of the previous branch (assumes pre-built command wrapper for `git-branch`).
+1. Get the name of the previous branch (assumes pre-built command wrapper for `git-branch`).
 
-```
-git branch --last
-```
+    ```
+    git branch --last
+    ```
 
-Excerpt from `git-branch` wrapper:
+    Excerpt from `git-branch` wrapper:
 
-```
---last|-L)
-	git check-ref-format --branch @{-1} 2>/dev/null
+    ```
+    --last|-L)
+        git check-ref-format --branch @{-1} 2>/dev/null
 
-	if [[ $? -gt 0 ]]; then
-		printf '%s\n' "$ERR_NO_PREV_BRANCH"
+        if [[ $? -gt 0 ]]; then
+            printf '%s\n' "$ERR_NO_PREV_BRANCH"
 
-		exit 1
-	fi
+            exit 1
+        fi
 
-	exit 0
-;;
-```
+        exit 0
+    ;;
+    ```
 
-Add the first pathspec in the list derived from `git-status` (assumes pre-built command wrapper for `git-add`).
+2. Add the first pathspec in the list derived from `git-status` (assumes pre-built command wrapper for `git-add`).
 
-```
-git add %1
-```
+    ```
+    git add %1
+    ```
 
-Bypass `git-extend` and get the last five log entries.
+3. Bypass `git-extend` and get the last five log entries.
 
-```
-git --bypass log --max-count=5
-```
+    ```
+    git --bypass log --max-count=5
+    ```
 
 ## Wrappers
 
