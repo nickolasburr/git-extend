@@ -55,6 +55,7 @@ brew install git-extend
 
 ```
 git clone https://github.com/nickolasburr/git-extend.git
+cd git-extend
 make
 make install
 ```
