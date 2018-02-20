@@ -70,7 +70,7 @@ Additionally, the following files are symlinked in `$PREFIX`:
 
 + `$PREFIX/bin/git-extend` -> `$PREFIX/bin/git`
 
-<div style="color: red; font-weight: bold">Important</div>: If a `git` executable is encountered during `make install`, the process will fail. This will happen if you have Git installed at `$PREFIX/bin/git`. In this event, run `make uninstall` and use `PREFIX` to specify an alternate location, then add that pathname to the beginning of your `$PATH`.
+<strong>Important</strong>: If a `git` executable is encountered during `make install`, the process will fail. This will happen if you have Git installed at `$PREFIX/bin/git`. In this event, run `make uninstall` and use `PREFIX` to specify an alternate location, then add that pathname to the beginning of your `$PATH`.
 
 ## Options
 
