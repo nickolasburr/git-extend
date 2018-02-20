@@ -20,7 +20,7 @@
 
 ## Purpose
 
-Git can be quite unintuitive at times. Options you think should exist, do not. Tasks you think should be simple, are not. For many, a few extra convenience options is plenty.
+Git can be quite unintuitive, at times. Options you think should exist, do not. Tasks you think should be simple, are not. For many, a few extra convenience options is highly desirable.
 
 Now, you may ask yourself:
 
