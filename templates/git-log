@@ -6,15 +6,6 @@
 
 ERR_NOTREPO="Not a Git repository."
 
-if [[ ! "$(git rev-parse --is-inside-work-tree)" ]] 2>/dev/null; then
-	printf '%s\n' "$ERR_NOTREPO"
-
-	exit 1
-fi
-
-# Total number of commits for the repository.
-TOTAL="$(git rev-list HEAD --count)"
-
 # Decorated `git log` graph format style.
 FORMAT="%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset"
 NUM="10"
@@ -34,14 +25,14 @@ while [[ $# -gt 0 ]]; do
 
 			exit 0
 		;;
-		--all)
+		--all|-a)
 			shift
 
 			ARGV+=("--max-count=$TOTAL")
 
 			shift
 		;;
-		--last)
+		--last|-l)
 			shift
 
 			NUM="$1"
@@ -49,6 +40,15 @@ while [[ $# -gt 0 ]]; do
 			if [[ ! $NUM =~ $REGEX ]]; then
 				NUM="1"
 			fi
+
+			if [[ ! "$($GIT rev-parse --is-inside-work-tree)" ]] 2>/dev/null; then
+				printf '%s\n' "$ERR_NOTREPO"
+
+				exit 1
+			fi
+
+			# Total number of commits for the repository.
+			TOTAL="$($GIT rev-list HEAD --count)"
 
 			if [[ $NUM -gt $TOTAL ]]; then
 				NUM="$TOTAL"
@@ -65,5 +65,11 @@ while [[ $# -gt 0 ]]; do
 		;;
 	esac
 done
+
+if [[ ! "$($GIT rev-parse --is-inside-work-tree)" ]] 2>/dev/null; then
+	printf '%s\n' "$ERR_NOTREPO"
+
+	exit 1
+fi
 
 $GIT log "${ARGV[@]}"
