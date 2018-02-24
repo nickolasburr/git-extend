@@ -4,7 +4,6 @@
 ### git-extend: Extend Git with command wrappers.
 ###
 
-BYPASS=0
 PREFIX="/usr/local"
 BINDIR="$PREFIX/bin"
 GIT="$BINDIR/git"
@@ -30,8 +29,8 @@ if [[ -n $TLPID ]] && [[ $TLPID -eq $PPID ]]; then
 	BYPASS=1
 fi
 
-if [[ $BYPASS -eq 1 ]]; then
-	exec $GIT "$@"
+if [[ -n $BYPASS ]] && [[ $BYPASS -eq 1 ]]; then
+	$GIT "$@"
 
 	exit $?
 fi
@@ -55,7 +54,7 @@ for PATHNAME in ${SCOPES[@]}; do
 			export GIT="$GIT ${@:1:COUNT}"
 
 			# Execute $TARGET with command-specific arguments only.
-			exec $TARGET "${ARGV[@]:1}"
+			$TARGET "${ARGV[@]:1}"
 
 			exit $?
 		fi
@@ -65,4 +64,4 @@ for PATHNAME in ${SCOPES[@]}; do
 	done
 done
 
-exec $GIT "$@"
+$GIT "$@"
