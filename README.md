@@ -1,6 +1,6 @@
 # git-extend(1)
 
-`git-extend` is a lightweight wrapper for Git builtins.
+`git-extend` is a featherweight wrapper for Git builtins.
 
 ## Table of Contents
 
@@ -16,11 +16,11 @@
 
 ## Description
 
-`git-extend` extends Git builtins via [command wrappers](#command-wrappers). It is intended for the individual who wants to use Git builtins organically, with a tinge of customization.
+`git-extend` extends Git builtins via [command wrappers](#command-wrappers). It is intended for the individual who prefers to use Git builtins organically (often referred to as a [purist](https://en.wikipedia.org/wiki/Purist)), but is okay with muddying the waters a bit to make certain tasks easier.
 
 ## Purpose
 
-Git can be quite unintuitive, at times. Options you think should exist, do not. Tasks you think should be simple, are not. For many, a few extra convenience options is highly desirable.
+To provide an interface for user-defined functionality around Git builtins.
 
 Now, you may ask yourself:
 
@@ -28,9 +28,9 @@ Now, you may ask yourself:
 
 --OR--
 
-> What advantages does git-extend provide that I can't get from git-config? Or from a shell alias?
+> What advantages does git-extend provide that I can't get from git-config? Or a shell alias?
 
-The difference is, with `git-extend`, you're augmenting Git builtins, not defining aliases you won't remember. The advantages are convenience, efficiency, and intuitiveness.
+The difference is, with `git-extend`, you're augmenting Git builtins with the options and functionality _you wish it had_ (and, therefore, will remember), instead of defining aliases and functions you'll never use.
 
 ## Caveats
 
