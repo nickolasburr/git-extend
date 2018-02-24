@@ -115,13 +115,16 @@ Additionally, the following files are symlinked in `$PREFIX`:
 
 ## Command Wrappers
 
-Command wrappers are executable scripts with the same name as a Git builtin. For example, `git-log` for `git log`, `git-add` for `git add`, and so on.
+As one might anticipate, a command wrapper is an executable script with the equivalent name of its Git builtin counterpart. For example, `git-log` for `git log`, `git-add` for `git add`, and so on.
 
 Templates are provided for several porcelain commands, including:
 
 + `git-add`
 + `git-branch`
++ `git-diff`
 + `git-log`
++ `git-merge`
 + `git-reflog`
++ `git-status`
 
-See [TEMPLATES](https://github.com/nickolasburr/git-extend/blob/master/TEMPLATES.md) for a complete list of pre-built command wrapper templates.
+For a complete list of pre-built command wrapper templates, see [TEMPLATES](https://github.com/nickolasburr/git-extend/blob/master/TEMPLATES.md).
