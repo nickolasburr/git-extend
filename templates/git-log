@@ -21,7 +21,7 @@ ARGV=(
 while [[ $# -gt 0 ]]; do
 	case $1 in
 		--help|-h)
-			git log --help
+			$GIT log --help
 
 			exit 0
 		;;
