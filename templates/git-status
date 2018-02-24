@@ -26,7 +26,7 @@ while [[ $# -gt 0 ]]; do
 			COUNT=0
 
 			# Prepend index # to pathspec.
-			$GIT status -sb | while read LINE; do
+			$GIT status -s | while read LINE; do
 				let "COUNT++"
 
 				echo "${COUNT}. $LINE"
