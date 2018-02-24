@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ###
-### git-extend: Extend Git with command wrappers.
+### git-extend: Extend Git builtins with command wrappers.
 ###
 
 PREFIX="/usr/local"
@@ -11,6 +11,10 @@ ARGV=()
 
 for ARG in "$@"; do
 	case $ARG in
+		extend)
+			# @todo: Build out git-extend options.
+			exit 0
+		;;
 		--bypass)
 			BYPASS=1
 		;;
@@ -48,7 +52,7 @@ for PATHNAME in ${SCOPES[@]}; do
 	while [[ ${#ARGV[@]} -gt 0 ]]; do
 		TARGET="$PATHNAME/git-${ARGV[0]}"
 
-		if [[ -f "$TARGET" ]] && [[ -x "$TARGET" ]]; then
+		if [[ -x "$TARGET" ]]; then
 			# Executable path with git(1) options, arguments (e.g. '/usr/bin/git -C ~/project').
 			# $GIT should be called from within the command wrappers to ensure proper handling.
 			export GIT="$GIT ${@:1:COUNT}"
@@ -60,7 +64,7 @@ for PATHNAME in ${SCOPES[@]}; do
 		fi
 
 		ARGV=("${ARGV[@]:1}")
-		let "COUNT++"
+		let COUNT++
 	done
 done
 
