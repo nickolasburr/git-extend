@@ -6,34 +6,29 @@
 
 ERR_NOTREPO="Not a Git repository."
 
-if [[ ! "$(git rev-parse --is-inside-work-tree)" ]] 2>/dev/null; then
-	printf '%s\n' "$ERR_NOTREPO"
-
-	exit 1
-fi
-
 ARGV=()
 FILES=()
 REGEX='^%[0-9]+$'
 STAGEABLE=()
 
-UNSTAGED="$(git status --porcelain=v1 | grep -E '^(\w|\s)(M|A|D|R|C|U)\s+' | awk '{$1=$1};1' | cut -d' ' -f2)"
-
-# Add unstaged files to stageable list.
-for FILE in ${UNSTAGED[@]}; do
-	STAGEABLE+=("$FILE")
-done
-
-UNTRACKED="$(git status --porcelain=v1 | grep '??' | cut -d' ' -f2)"
-
-# Add untracked files to stageable list.
-for FILE in ${UNTRACKED[@]}; do
-	STAGEABLE+=("$FILE")
-done
-
 while [[ $# -gt 0 ]]; do
 	case $1 in
+		--help|-h)
+			$GIT add --help
+
+			exit 0
+		;;
 		%*)
+			if [[ ! "$($GIT rev-parse --is-inside-work-tree)" ]] 2>/dev/null; then
+				printf '%s\n' "$ERR_NOTREPO"
+
+				exit 1
+			fi
+
+			# Unstaged, untracked files.
+			STAGEABLE+=($($GIT status --porcelain=v1 | grep -E '^(\w|\s)(A|C|D|M|R|U)\s+' | awk '{$1=$1};1' | cut -d' ' -f2))
+			STAGEABLE+=($($GIT status --porcelain=v1 | grep '??' | cut -d' ' -f2))
+
 			INDEX="$1"
 
 			if [[ ! "$INDEX" =~ $REGEX ]]; then
@@ -44,7 +39,7 @@ while [[ $# -gt 0 ]]; do
 
 			INDEX="$(( $(echo $INDEX | tr -d '%') - 1 ))"
 
-			if [[ $INDEX -lt 0 ]] || [[ $(expr $INDEX + 1) -gt ${#STAGEABLE[@]}  ]]; then
+			if [[ $INDEX -lt 0 ]] || [[ $(expr $INDEX + 1) -gt ${#STAGEABLE[@]} ]]; then
 				printf '%s is not a valid index.\n' "$(expr $INDEX + 1)"
 
 				exit 1
