@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+
+###
+### git-merge: Add convenience options to git-merge(1).
+###
+
+ERR_NOTREPO="Not a Git repository."
+ERR_NO_PREV_BRANCH="Unable to merge, no previous branch could be found."
+
+ARGV=()
+
+while [[ $# -gt 0 ]]; do
+	case $1 in
+		--help|-h)
+			git merge --help
+
+			exit 0
+		;;
+		--last|-L)
+			if [[ ! "$($GIT rev-parse --is-inside-work-tree)" ]] 2>/dev/null; then
+				echo "$ERR_NOTREPO"
+
+				exit 1
+			fi
+
+			LASTBRANCH="$($GIT check-ref-format --branch @{-1} 2>/dev/null)"
+
+			if [[ $? -gt 0 ]]; then
+				echo "$ERR_NO_PREV_BRANCH"
+
+				exit 1
+			fi
+
+			$GIT merge "${ARGV[@]}" $LASTBRANCH
+
+			exit $?
+		;;
+		*)
+			ARGV+=("$1")
+
+			shift
+		;;
+	esac
+done
+
+if [[ ! "$($GIT rev-parse --is-inside-work-tree)" ]] 2>/dev/null; then
+	echo "$ERR_NOTREPO"
+
+	exit 1
+fi
+
+$GIT merge "${ARGV[@]}"
