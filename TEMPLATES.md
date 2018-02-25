@@ -13,8 +13,11 @@ Below is a list of pre-built command wrappers that illustrate how `git-extend` w
 
 - [`git-add`](#git-add)
 - [`git-branch`](#git-branch)
+- [`git-diff`](#git-diff)
 - [`git-log`](#git-log)
+- [`git-merge`](#git-merge)
 - [`git-reflog`](#git-reflog)
+- [`git-status`](#git-status)
 
 ### `git-add`
 
