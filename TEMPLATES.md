@@ -4,10 +4,10 @@ Below is a list of pre-built command wrappers that illustrate how `git-extend` w
 
 ## Option Types
 
-+ **Default:**
++ **Builtin:**
   - Git builtin options given to `git` via the command wrapper. You can add/modify/remove them to your liking.
-+ **Wrapper:**
-  - User-defined options which augment input given to `git` via the command wrapper. Use unique option names to avoid conflicts.
++ **User:**
+  - User-defined options which augment input given to `git` via the command wrapper. **Use unique option names to avoid conflicts.**
 
 ## Pre-built Templates
 
@@ -18,7 +18,7 @@ Below is a list of pre-built command wrappers that illustrate how `git-extend` w
 
 ### `git-add`
 
-+ `%n`: Add pathspec at index `n`, given output from `git status`. Index starts at `1`.
++ `%n`: Add pathspec at index `n`, referenced via the list derived from [`git status --numbered`](https://github.com/nickolasburr/git-extend/blob/master/templates/git-status#L19-L36). Index starts at `1`.
 
 **Usage:**
 
@@ -32,9 +32,9 @@ git add %1
 
 #### _Options_
 
-+ **Default**
++ **Builtin**
   - _none_
-+ **Wrapper**
++ **User**
   - `--last`, `-L`: Get the name of the last branch.
 
 **Usage:**
@@ -46,17 +46,29 @@ git branch --last
 
 ---
 
+### `git-diff`
+
+#### _Options_
+
++ **Builtin**
+  - `--color-words`
+  - `--minimal`
++ **User**
+  - _none_
+
+---
+
 ### `git-log`
 
 #### _Options_
 
-+ **Default**
++ **Builtin**
   - `--graph`
   - `--abbrev-commit`
   - `--date=relative`
   - `--format="%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset"`
   - `--max-count=10`
-+ **Wrapper**
++ **User**
   - `--all`: Get all commits (overrides initial `--max-count=$NUM`).
   - `--last`: Get last `n` commits (overrides initial `--max-count=$TOTAL`).
 
@@ -68,16 +80,33 @@ git log --last 15
 
 ---
 
+### `git-merge`
+
+#### _Options_
+
++ **Builtin**
+  - _none_
++ **User**
+  - `--last`, `-L`: Merge the previous branch into the current branch.
+
+**Usage:**
+
+```
+git merge --no-ff --last
+```
+
+---
+
 ### `git-reflog`
 
 #### _Options_
 
-+ **Default**
++ **Builtin**
   - `--abbrev-commit`
   - `--date=relative`
   - `--format="%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset"`
   - `--max-count=10`
-+ **Wrapper**
++ **User**
   - `--all`: Get all commits (overrides initial `--max-count=$NUM`).
   - `--last`: Get last `n` commits (overrides initial `--max-count=$TOTAL`).
 
@@ -85,4 +114,25 @@ git log --last 15
 
 ```
 git reflog --all
+```
+
+---
+
+### `git-status`
+
+#### _Options_
+
++ **Builtin**
+  - _none_
++ **User**
+  - `--numbered`, `-N`: Get an ordered list of unstaged and untracked files in the worktree. Intended to be used with [`git-add`](#git-add).
+
+**Usage:**
+
+```
+git status --numbered
+
+# -> 1. M apply.c
+     2. M merge.c
+     3. ?? rebase.c
 ```
