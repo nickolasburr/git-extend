@@ -17,6 +17,11 @@ while [[ $# -gt 0 ]]; do
 
 			exit 0
 		;;
+		--inline|-i)
+			shift
+
+			ARGV+=("--word-diff=plain")
+		;;
 		*)
 			ARGV+=("$1")
 
