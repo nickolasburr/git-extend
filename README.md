@@ -15,7 +15,7 @@
 
 ## Description
 
-`git-extend` extends Git builtins via [command wrappers](#command-wrappers). In other words, it provides an interface for user-defined functionality around Git builtins. It is intended for the individual who prefers to use Git builtins organically, but is okay with muddying the waters a bit to make certain tasks easier.
+`git-extend` extends Git builtins via [command wrappers](#command-wrappers). Put simply, it provides an interface for user-defined functionality. It is intended for the individual who prefers to use Git builtins organically, but is okay with muddying the waters a bit to make arduous tasks easier.
 
 Now, you may ask yourself:
 
@@ -29,9 +29,9 @@ The difference is, with `git-extend`, you're augmenting Git builtins with option
 
 ## Installation
 
-<strong>Important</strong>: Please read the [Caveats](#caveats) section before installing.
+<strong>Important</strong>: Please read the [Caveats](#caveats) section before continuing.
 
-You can install `git-extend` via Homebrew or manually.
+Once you have read the **Caveats** section, you can install `git-extend` via Homebrew or manually.
 
 ### Homebrew
 
