@@ -6,15 +6,6 @@
 
 ERR_NOTREPO="Not a Git repository."
 
-if [[ ! "$(git rev-parse --is-inside-work-tree)" ]] 2>/dev/null; then
-	printf '%s\n' "$ERR_NOTREPO"
-
-	exit 1
-fi
-
-# All refs contained in reflog.
-TOTAL="$(git --no-pager reflog show --pretty=format:'%gd' | tr ' ' '\n' | wc -l)"
-
 # Decorated `git reflog show` graph format style.
 FORMAT="%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset"
 NUM="10"
@@ -29,18 +20,33 @@ ARGV=(
 while [[ $# -gt 0 ]]; do
 	case $1 in
 		--help|-h)
-			git reflog --help
+			$GIT reflog --help
 
 			exit 0
 		;;
 		--all)
+			if [[ ! "$($GIT rev-parse --is-inside-work-tree)" ]] 2>/dev/null; then
+				echo "$ERR_NOTREPO"
+
+				exit 1
+			fi
+
 			shift
+
+			# All refs contained in reflog.
+			TOTAL="$($GIT --no-pager reflog show --pretty=format:'%gd' | tr ' ' '\n' | wc -l)"
 
 			ARGV+=("--max-count=$TOTAL")
 
 			shift
 		;;
 		--last)
+			if [[ ! "$($GIT rev-parse --is-inside-work-tree)" ]] 2>/dev/null; then
+				echo "$ERR_NOTREPO"
+
+				exit 1
+			fi
+
 			shift
 
 			NUM="$1"
@@ -48,6 +54,9 @@ while [[ $# -gt 0 ]]; do
 			if [[ ! $NUM =~ $REGEX ]]; then
 				NUM="1"
 			fi
+
+			# All refs contained in reflog.
+			TOTAL="$($GIT --no-pager reflog show --pretty=format:'%gd' | tr ' ' '\n' | wc -l)"
 
 			if [[ $NUM -gt $TOTAL ]]; then
 				NUM=$TOTAL
