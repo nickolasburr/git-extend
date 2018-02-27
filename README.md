@@ -31,7 +31,7 @@ The difference is, with `git-extend`, you're augmenting Git builtins with option
 
 <strong>Important</strong>: Please read the [Caveats](#caveats) section before continuing.
 
-Once you have read the **Caveats** section, you can install `git-extend` via Homebrew or manually.
+Once you've read the **Caveats** section, you can install `git-extend` via Homebrew or manually.
 
 ### Homebrew
 
@@ -49,18 +49,17 @@ make
 make install
 ```
 
-The installation directory is represented by `$PREFIX`, and defaults to `/usr/local`. The following files are installed in `$PREFIX`:
+The install prefix is represented by `PREFIX`, and defaults to `/usr/local`. The following files and symlinks are installed in `PREFIX`:
 
 + `$PREFIX/bin/git-extend`
 + `$PREFIX/share/man/man1/git-extend.1.gz`
++ `$PREFIX/bin/git-extend` -> `$PREFIX/bin/git`
 
 You can install to an alternate location by passing `PREFIX` to `make install`. For example, `make install PREFIX=$HOME/.usr`.
 
-Additionally, the following files are symlinked in `$PREFIX`:
+Once installed, verify `$PREFIX/bin` is added to your `PATH`. To install command wrappers, simply place them somewhere in your `PATH`.
 
-+ `$PREFIX/bin/git-extend` -> `$PREFIX/bin/git`
-
-<strong>Important</strong>: If a `git` executable is encountered during `make install`, the process will fail. This will happen if you have Git installed at `$PREFIX/bin/git`. In this event, run `make uninstall` and use `PREFIX` to specify an alternate location, then add that pathname to the beginning of your `$PATH`.
+<strong>Important</strong>: If a `git` executable is encountered during installation, the process will exit immediately. This will happen if you already have Git installed at `$PREFIX/bin/git`. In this event, install to an alternate location.
 
 ## Caveats
 
