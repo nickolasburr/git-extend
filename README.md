@@ -66,8 +66,9 @@ Once installed, verify `$PREFIX/bin` is added to your `PATH`. To install command
 A few important caveats and suggestions to consider prior to installation:
 
 + Use `git-extend` judiciously. Don't go buckwild, it defeats the purpose of the tool.
-+ When adding your own options to a command wrapper, make sure the builtin **does not have an equivalent option**. Otherwise, this can and will lead to **unexpected behavior**.
-+ **Always** test command wrappers somewhere safe before using them in your workflow. If you don't, bad things _will_ happen.
++ Prefer Interrogators over Manipulators.
++ When adding your own options to a command wrapper, give it due diligence. **Don't add options the builtin already defines.**
++ **Always** test command wrappers somewhere safe before using them in your workflow.
 + When in doubt, use `--bypass`. See [Examples](#examples) for `--bypass` usage.
 
 ## Options
