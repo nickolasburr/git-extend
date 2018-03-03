@@ -90,7 +90,7 @@ git log --last 15
 + **Builtin**
   - _none_
 + **User**
-  - `--last`, `-L`: Merge the previous branch into the current branch.
+  - `--trim`, `-T`: Delete the previous branch after merge (if applicable).
 
 **Usage:**
 
