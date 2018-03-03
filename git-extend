@@ -15,15 +15,19 @@ for ARG in "$@"; do
 		extend)
 			shift
 
+			# git-extend(1) specific options.
 			case $1 in
 				--list|-l)
-					shopt -s extglob
-
 					for PATHNAME in ${SCOPES[@]}; do
 						find -L $PATHNAME -mindepth 1 -maxdepth 1 \( -type f -o -type l \) -name "git-*" -exec test -x {} \; -exec ls {} \; 2>/dev/null ;
 					done
 
 					exit 0
+				;;
+				*)
+					printf 'Invalid option %s\n' "$1"
+
+					exit 1
 				;;
 			esac
 		;;
