@@ -58,7 +58,7 @@ make
 make install
 ```
 
-The install prefix is represented by `PREFIX`, and defaults to `/usr/local`. The following files and symlinks are installed in `PREFIX`:
+The install prefix is represented by `PREFIX`, and defaults to `/usr/local/git-extend`. The following files and symlinks are installed in `PREFIX`:
 
 + `$PREFIX/bin/git-extend`
 + `$PREFIX/bin/git-extend` -> `$PREFIX/bin/git`
@@ -66,9 +66,12 @@ The install prefix is represented by `PREFIX`, and defaults to `/usr/local`. The
 
 You can install to an alternate location by passing `PREFIX` to `make install`. For example, `make install PREFIX=$HOME/.usr`.
 
-Once installed, verify `$PREFIX/bin` is added to the front of your `PATH`. It is important that `git-extend` is the **first `git` executable found in your `PATH`**.
+<strong>Important</strong>: If a `git` executable is encountered during installation, the process will exit immediately. This will happen if:
 
-<strong>Important</strong>: If a `git` executable is encountered during installation, the process will exit immediately. This will happen if you already have Git installed at `$PREFIX/bin/git`. In this event, install to an alternate location.
++ You already have `git-extend` installed and symlinked at `$PREFIX/bin/git`. You can use `--force` to overwrite during installation. Be careful!
++ You used `PREFIX` to specify an alternate location and a `git` executable is already installed there. In this case, simply install to a different location.
+
+Once installed, verify `$PREFIX/bin` is added to your `PATH`. It is important `git-extend` is the **first `git` executable found in your `PATH`**. You can check this by running `type -all git`.
 
 ## Configuration
 
@@ -78,13 +81,14 @@ For more details on command wrappers, see [Command Wrappers](#command-wrappers).
 
 ## Caveats
 
-A few important caveats and suggestions to consider prior to installation:
+Below are a few important caveats and considerations to think about prior to installation:
 
-+ Use `git-extend` judiciously. Don't go buckwild, it defeats the purpose of the tool.
++ Use `git-extend` judiciously. It's lightweight - keep it that way.
 + Prefer Interrogators over Manipulators.
-+ When adding your own options to a command wrapper, give it due diligence. **Don't add options the builtin already defines.**
++ Keep command wrappers simple. Only add functionality you will actually use, and use frequently.
++ When adding user-defined options to a command wrapper, give it due diligence. **Don't add options the builtin already defines. That's just senseless**
 + **Always** test command wrappers somewhere safe before using them in your workflow.
-+ When in doubt, use `--bypass`. See [Examples](#examples) for `--bypass` usage.
++ When in doubt, use `--bypass`. It is the equivalent of calling the `git` executable directly. See [Examples](#examples) for `--bypass` usage.
 
 ## Options
 
