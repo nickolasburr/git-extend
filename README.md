@@ -8,6 +8,7 @@
 - [Installation](#installation)
   + [Homebrew](#homebrew)
   + [Manual](#manual)
+- [Configuration](#configuration)
 - [Caveats](#caveats)
 - [Options](#options)
 - [Examples](#examples)
@@ -15,17 +16,25 @@
 
 ## Description
 
-`git-extend` extends Git builtins via [command wrappers](#command-wrappers). Put simply, it provides an interface for user-defined functionality. It is intended for the individual who prefers to use Git builtins organically, but is okay with muddying the waters a bit to make arduous tasks easier.
+`git-extend` extends Git builtins via [command wrappers](#command-wrappers). Simply put, it provides an interface for user-defined functionality.
 
 Now, you may ask yourself:
 
-> How is this different from using git-config aliases?
+> How is this different from using git-config variables?
 
---OR--
+With `git-extend`, you're augmenting Git builtins with options and functionality _you want to use_, regardless of whether git-config offers the capability or not.
 
-> What advantages does git-extend provide that I can't get from git-config? Or a shell alias?
+> What advantages does git-extend provide that I can't get from git-config?
 
-The difference is, with `git-extend`, you're augmenting Git builtins with options and functionality _you wish it had_ (and, therefore, will remember), instead of defining aliases and functions you're less likely to use.
+With git-config, you're confined to the configuration variables for the builtin. There is no builtin override via git-config, so the alternative is to define an alias.
+
+> What advantages does git-extend provide that I can't get from a shell alias? Or a shell function?
+
+A shell alias is just that - an alias you have to remember in order to get value from it. A shell function is not scalable.
+
+> Wouldn't it make more sense to use a hook?
+
+Hooks serve a noble purpose, but they have limited use cases and don't provide granular control.
 
 ## Installation
 
@@ -52,14 +61,20 @@ make install
 The install prefix is represented by `PREFIX`, and defaults to `/usr/local`. The following files and symlinks are installed in `PREFIX`:
 
 + `$PREFIX/bin/git-extend`
-+ `$PREFIX/share/man/man1/git-extend.1.gz`
 + `$PREFIX/bin/git-extend` -> `$PREFIX/bin/git`
++ `$PREFIX/share/man/man1/git-extend.1.gz`
 
 You can install to an alternate location by passing `PREFIX` to `make install`. For example, `make install PREFIX=$HOME/.usr`.
 
-Once installed, verify `$PREFIX/bin` is added to your `PATH`. To install command wrappers, simply place them somewhere in your `PATH`.
+Once installed, verify `$PREFIX/bin` is added to the front of your `PATH`. It is important that `git-extend` is the **first `git` executable found in your `PATH`**.
 
 <strong>Important</strong>: If a `git` executable is encountered during installation, the process will exit immediately. This will happen if you already have Git installed at `$PREFIX/bin/git`. In this event, install to an alternate location.
+
+## Configuration
+
+Configuration is straightforward. To use a command wrapper, name the file accordingly, add it anywhere in your `PATH`, and make it executable.
+
+For more details on command wrappers, see [Command Wrappers](#command-wrappers).
 
 ## Caveats
 
@@ -74,6 +89,8 @@ A few important caveats and suggestions to consider prior to installation:
 ## Options
 
 + `--bypass`: Bypass all `git-extend` command wrappers.
++ `extend`: `git-extend`-specific options.
+  - `--list`, `-l`: List all known wrappers.
 
 ## Examples
 
@@ -97,7 +114,7 @@ A few important caveats and suggestions to consider prior to installation:
 
 ## Command Wrappers
 
-As one might anticipate, a command wrapper is an executable script with the equivalent name of its Git builtin counterpart. For example, `git-log` for `git log`, `git-add` for `git add`, and so on.
+As one might anticipate, a command wrapper is an executable script with the equivalent name of its Git builtin counterpart. For example, `git-log` for `git log`, `git-add` for `git add`, and so on. However, command wrappers are not limited to Git builtins. You can also create arbitrary Git commands using the same conventions, and `git-extend` will resolve the command accordingly.
 
 Templates are provided for several porcelain commands, including:
 
