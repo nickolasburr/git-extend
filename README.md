@@ -8,6 +8,7 @@
 - [Installation](#installation)
   + [Homebrew](#homebrew)
   + [Manual](#manual)
+- [Configuration](#configuration)
 - [Caveats](#caveats)
 - [Options](#options)
 - [Examples](#examples)
