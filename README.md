@@ -86,9 +86,9 @@ Below are a few important caveats and considerations to think about prior to ins
 + Use `git-extend` judiciously. It's lightweight - keep it that way.
 + Prefer Interrogators over Manipulators.
 + Keep command wrappers simple. Only add functionality you will actually use, and use frequently.
-+ When adding user-defined options to a command wrapper, give it due diligence. **Don't add options the builtin already defines. That's just senseless**
++ When adding user-defined options to a command wrapper, give it due diligence. **Don't add options the builtin already defines. It's just senseless.**
 + **Always** test command wrappers somewhere safe before using them in your workflow.
-+ When in doubt, use `--bypass`. It is the equivalent of calling the `git` executable directly. See [Examples](#examples) for `--bypass` usage.
++ When in doubt, use `--bypass`. It's equivalent to calling the `git` executable directly. See [Examples](#examples) for usage.
 
 ## Options
 
