@@ -114,7 +114,7 @@ A few important caveats and suggestions to consider prior to installation:
 
 ## Command Wrappers
 
-As one might anticipate, a command wrapper is an executable script with the equivalent name of its Git builtin counterpart. For example, `git-log` for `git log`, `git-add` for `git add`, and so on.
+As one might anticipate, a command wrapper is an executable script with the equivalent name of its Git builtin counterpart. For example, `git-log` for `git log`, `git-add` for `git add`, and so on. However, command wrappers are not limited to Git builtins. You can also create arbitrary Git commands using the same conventions, and `git-extend` will resolve the command accordingly.
 
 Templates are provided for several porcelain commands, including:
 
