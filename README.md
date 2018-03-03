@@ -116,9 +116,18 @@ Below are a few important caveats and considerations to think about prior to ins
     git --bypass log --max-count=5
     ```
 
+4. Merge the previous branch into `master` and, upon successful merge, delete the previous branch (see [`git-merge`](https://github.com/nickolasburr/git-extend/blob/master/templates/git-merge)).
+
+    ```
+    git checkout master
+    git merge --no-ff --trim -
+    ```
+
 ## Command Wrappers
 
-As one might anticipate, a command wrapper is an executable script with the equivalent name of its Git builtin counterpart. For example, `git-log` for `git log`, `git-add` for `git add`, and so on. However, command wrappers are not limited to Git builtins. You can also create arbitrary Git commands using the same conventions, and `git-extend` will resolve the command accordingly.
+As one might anticipate, a command wrapper is an executable script with the equivalent name of its Git builtin counterpart. For example, `git-log` for `git log`, `git-add` for `git add`, and so on.
+
+However, command wrappers are not limited to Git builtins. You can also create arbitrary Git commands using the same conventions, and `git-extend` will resolve the command accordingly.
 
 Templates are provided for several porcelain commands, including:
 
