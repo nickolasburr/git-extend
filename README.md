@@ -15,17 +15,25 @@
 
 ## Description
 
-`git-extend` extends Git builtins via [command wrappers](#command-wrappers). Put simply, it provides an interface for user-defined functionality. It is intended for the individual who prefers to use Git builtins organically, but is okay with muddying the waters a bit to make arduous tasks easier.
+`git-extend` extends Git builtins via [command wrappers](#command-wrappers). Simply put, it provides an interface for user-defined functionality.
 
 Now, you may ask yourself:
 
-> How is this different from using git-config aliases?
+> How is this different from using git-config variables?
 
---OR--
+With `git-extend`, you're augmenting Git builtins with options and functionality _you want to use_, regardless of whether git-config offers the capability or not.
 
-> What advantages does git-extend provide that I can't get from git-config? Or a shell alias?
+> What advantages does git-extend provide that I can't get from git-config?
 
-The difference is, with `git-extend`, you're augmenting Git builtins with options and functionality _you wish it had_ (and, therefore, will remember), instead of defining aliases and functions you're less likely to use.
+With git-config, you're confined to the configuration variables for the builtin. There is no builtin override via git-config, so the alternative is to define an alias.
+
+> What advantages does git-extend provide that I can't get from a shell alias? Or a shell function?
+
+A shell alias is just that - an alias you have to remember in order to get value from it. A shell function is not scalable.
+
+> Wouldn't it make more sense to use a hook?
+
+Hooks serve a noble purpose, but they have limited use cases and don't provide granular control.
 
 ## Installation
 
