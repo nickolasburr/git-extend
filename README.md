@@ -60,14 +60,20 @@ make install
 The install prefix is represented by `PREFIX`, and defaults to `/usr/local`. The following files and symlinks are installed in `PREFIX`:
 
 + `$PREFIX/bin/git-extend`
-+ `$PREFIX/share/man/man1/git-extend.1.gz`
 + `$PREFIX/bin/git-extend` -> `$PREFIX/bin/git`
++ `$PREFIX/share/man/man1/git-extend.1.gz`
 
 You can install to an alternate location by passing `PREFIX` to `make install`. For example, `make install PREFIX=$HOME/.usr`.
 
-Once installed, verify `$PREFIX/bin` is added to your `PATH`. To install command wrappers, simply place them somewhere in your `PATH`.
+Once installed, verify `$PREFIX/bin` is added to the front of your `PATH`. It is important that `git-extend` is the **first `git` executable found in your `PATH`**.
 
 <strong>Important</strong>: If a `git` executable is encountered during installation, the process will exit immediately. This will happen if you already have Git installed at `$PREFIX/bin/git`. In this event, install to an alternate location.
+
+## Configuration
+
+Configuration is straightforward. To use a command wrapper, name the file accordingly, add it anywhere in your `PATH`, and make it executable.
+
+For more details on command wrappers, see [Command Wrappers](#command-wrappers).
 
 ## Caveats
 
