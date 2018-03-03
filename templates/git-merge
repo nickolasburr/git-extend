@@ -12,11 +12,13 @@ ARGV=()
 while [[ $# -gt 0 ]]; do
 	case $1 in
 		--help|-h)
-			git merge --help
+			$GIT merge --help
 
 			exit 0
 		;;
-		--last|-L)
+		--trim|-T)
+			shift
+
 			if [[ ! "$($GIT rev-parse --is-inside-work-tree)" ]] 2>/dev/null; then
 				echo "$ERR_NOTREPO"
 
@@ -30,10 +32,6 @@ while [[ $# -gt 0 ]]; do
 
 				exit 1
 			fi
-
-			$GIT merge "${ARGV[@]}" $LASTBRANCH
-
-			exit $?
 		;;
 		*)
 			ARGV+=("$1")
@@ -50,3 +48,11 @@ if [[ ! "$($GIT rev-parse --is-inside-work-tree)" ]] 2>/dev/null; then
 fi
 
 $GIT merge "${ARGV[@]}"
+
+# On a successful merge where --trim was specified.
+if [[ $? -eq 0 ]] && [[ -n "$LASTBRANCH" ]]; then
+	$(echo $($GIT branch --list) | grep "$LASTBRANCH" >/dev/null 2>&1)
+
+	# If $LASTBRANCH is a valid local branch, attempt soft delete.
+	[[ $? -eq 0 ]] && $GIT branch -d $LASTBRANCH
+fi
