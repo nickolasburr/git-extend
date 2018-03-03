@@ -90,12 +90,12 @@ git log --last 15
 + **Builtin**
   - _none_
 + **User**
-  - `--trim`, `-T`: Delete the previous branch after merge (if applicable).
+  - `--trim`, `-T`: Delete the previous branch after a successful merge (if applicable).
 
 **Usage:**
 
 ```
-git merge --no-ff --last
+git merge --no-ff --trim -
 ```
 
 ---
