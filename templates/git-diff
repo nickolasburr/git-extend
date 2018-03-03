@@ -6,7 +6,6 @@
 
 # Implicit options.
 ARGV=(
-	"--color-words"
 	"--minimal"
 )
 
@@ -17,7 +16,12 @@ while [[ $# -gt 0 ]]; do
 
 			exit 0
 		;;
-		--inline|-i)
+		--color)
+			shift
+
+			ARGV+=("--word-diff=color")
+		;;
+		--sxs)
 			shift
 
 			ARGV+=("--word-diff=plain")
