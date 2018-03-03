@@ -49,10 +49,10 @@ fi
 
 $GIT merge "${ARGV[@]}"
 
-# On a successful merge where --trim was specified.
+# On a successful merge where --trim was specified and a previous branch (ref) exists.
 if [[ $? -eq 0 ]] && [[ -n "$LASTBRANCH" ]]; then
 	$(echo $($GIT branch --list) | grep "$LASTBRANCH" >/dev/null 2>&1)
 
-	# If $LASTBRANCH is a valid local branch, attempt soft delete.
+	# If $LASTBRANCH is a valid, local branch, attempt soft delete.
 	[[ $? -eq 0 ]] && $GIT branch -d $LASTBRANCH
 fi
