@@ -89,6 +89,8 @@ A few important caveats and suggestions to consider prior to installation:
 ## Options
 
 + `--bypass`: Bypass all `git-extend` command wrappers.
++ `extend`: `git-extend`-specific options.
+  - `--list`, `-l`: List all known wrappers.
 
 ## Examples
 
