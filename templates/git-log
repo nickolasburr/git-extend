@@ -28,18 +28,18 @@ while [[ $# -gt 0 ]]; do
 		--all|-a)
 			shift
 
-			ARGV+=("--max-count=$TOTAL")
+			if [[ ! "$($GIT rev-parse --is-inside-work-tree)" ]] 2>/dev/null; then
+				printf '%s\n' "$ERR_NOTREPO"
 
-			shift
+				exit 1
+			fi
+
+			[[ -z "$TOTAL" ]] && TOTAL="$($GIT rev-list HEAD --count)"
+
+			ARGV+=("--max-count=$TOTAL")
 		;;
 		--last|-l)
 			shift
-
-			NUM="$1"
-
-			if [[ ! $NUM =~ $REGEX ]]; then
-				NUM="1"
-			fi
 
 			if [[ ! "$($GIT rev-parse --is-inside-work-tree)" ]] 2>/dev/null; then
 				printf '%s\n' "$ERR_NOTREPO"
@@ -47,12 +47,11 @@ while [[ $# -gt 0 ]]; do
 				exit 1
 			fi
 
-			# Total number of commits for the repository.
-			TOTAL="$($GIT rev-list HEAD --count)"
+			NUM="$1"
 
-			if [[ $NUM -gt $TOTAL ]]; then
-				NUM="$TOTAL"
-			fi
+			[[ -z "$TOTAL" ]] && TOTAL="$($GIT rev-list HEAD --count)"
+			[[ ! $NUM =~ $REGEX ]] && NUM=1
+			[[ $NUM -gt $TOTAL ]] && NUM="$TOTAL"
 
 			ARGV+=("--max-count=$NUM")
 
