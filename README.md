@@ -58,7 +58,7 @@ make
 make install
 ```
 
-The install prefix is represented by `PREFIX`, and defaults to `/usr/local`. The following files and symlinks are installed in `PREFIX`:
+The install prefix is represented by `PREFIX`, and defaults to `/usr/local/git-extend`. The following files and symlinks are installed in `PREFIX`:
 
 + `$PREFIX/bin/git-extend`
 + `$PREFIX/bin/git-extend` -> `$PREFIX/bin/git`
@@ -66,9 +66,12 @@ The install prefix is represented by `PREFIX`, and defaults to `/usr/local`. The
 
 You can install to an alternate location by passing `PREFIX` to `make install`. For example, `make install PREFIX=$HOME/.usr`.
 
-Once installed, verify `$PREFIX/bin` is added to the front of your `PATH`. It is important that `git-extend` is the **first `git` executable found in your `PATH`**.
+<strong>Important</strong>: If a `git` executable is encountered during installation, the process will exit immediately. This will happen if:
 
-<strong>Important</strong>: If a `git` executable is encountered during installation, the process will exit immediately. This will happen if you already have Git installed at `$PREFIX/bin/git`. In this event, install to an alternate location.
++ You already have `git-extend` installed and symlinked at `$PREFIX/bin/git`. You can use `--force` to overwrite during installation. Be careful!
++ You used `PREFIX` to specify an alternate location and a `git` executable is already installed there. In this case, simply install to a different location.
+
+Once installed, verify `$PREFIX/bin` is added to your `PATH`. It is important `git-extend` is the **first `git` executable found in your `PATH`**. You can check this by running `type -all git`.
 
 ## Configuration
 
