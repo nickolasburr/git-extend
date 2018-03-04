@@ -94,7 +94,7 @@ Below are a few important caveats and considerations to think about prior to ins
 
 + `--bypass`: Bypass all `git-extend` command wrappers.
 + `extend`: `git-extend` specific options.
-  - `--list`, `-l`: List all known wrappers.
+  - `--list`, `-l`: List all `git-*` executables found in `PATH`.
 
 ## Examples
 
