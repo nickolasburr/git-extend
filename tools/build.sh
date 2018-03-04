@@ -18,6 +18,8 @@ SED="/usr/bin/sed"
 SEDOPTS="-i ''"
 SEDMATCH="s@$DEFDIR@$GITPREFIX@g"
 
+cd ..
+
 # Update PREFIX in git-extend, if needed.
 if [[ $GITPREFIX != $DEFDIR ]]; then
 	$SED $SEDOPTS $SEDMATCH "$SRCDIR/$TARGET"
