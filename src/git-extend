@@ -10,6 +10,14 @@ BINDIR="$PREFIX/bin"
 GIT="$BINDIR/git"
 ARGV=()
 
+read -r -d '' USAGE <<-EOS
+  Usage: git extend [OPTIONS]
+
+  OPTIONS:
+    --help, -h: Show usage information.
+    --list, -l: List all git-* executables found in PATH.
+EOS
+
 for ARG in "$@"; do
 	case $ARG in
 		extend)
@@ -17,9 +25,14 @@ for ARG in "$@"; do
 
 			# git-extend(1) specific options.
 			case $1 in
+				--help|-h)
+					echo "$USAGE"
+
+					exit 0
+				;;
 				--list|-l)
 					for PATHNAME in ${SCOPES[@]}; do
-						find -L $PATHNAME -mindepth 1 -maxdepth 1 \( -type f -o -type l \) -name "git-*" -exec test -x {} \; -exec ls {} \; 2>/dev/null ;
+						find -L $PATHNAME -maxdepth 1 \( -type f -o -type l \) -name "git-*" -exec test -x {} \; -exec ls {} \; 2>/dev/null ;
 					done
 
 					exit 0
@@ -45,6 +58,9 @@ set -- "${ARGV[@]}"
 unset ARGV
 unset ARG
 
+# In a situation where a command wrapper calls `git`
+# instead of $GIT, check $TLPID against $PPID, and
+# exit if the calling PID is a match.
 if [[ -n $TLPID ]] && [[ $TLPID -eq $PPID ]]; then
 	BYPASS=1
 fi
@@ -63,9 +79,19 @@ for PATHNAME in ${SCOPES[@]}; do
 	COUNT=0
 
 	while [[ ${#ARGV[@]} -gt 0 ]]; do
-		TARGET="$PATHNAME/git-${ARGV[0]}"
+		PARAM="${ARGV[0]}"
 
-		if [[ -x "$TARGET" ]]; then
+		# Mitigate any ambiguity stemming from certain git(1) options.
+		# (e.g. 'git -C diff log', where 'diff' is a relative directory)
+		case $PARAM in
+			-C)
+				CHDIR="${ARGV[1]}"
+			;;
+		esac
+
+		TARGET="$PATHNAME/git-${PARAM}"
+
+		if [[ $PARAM != $CHDIR ]] && [[ -x $TARGET ]]; then
 			# Executable path with git(1) options, arguments (e.g. '/usr/bin/git -C ~/project').
 			# $GIT should be called from within the command wrappers to ensure proper handling.
 			export GIT="$GIT ${@:1:COUNT}"
