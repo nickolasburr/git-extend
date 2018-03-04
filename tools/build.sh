@@ -22,5 +22,5 @@ cd ..
 
 # Update PREFIX in git-extend, if needed.
 if [[ $GITPREFIX != $DEFDIR ]]; then
-	$SED $SEDOPTS $SEDMATCH "$SRCDIR/$TARGET"
+	eval "$SED $SEDOPTS $SEDMATCH $SRCDIR/$TARGET"
 fi
