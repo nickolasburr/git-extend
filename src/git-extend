@@ -5,8 +5,8 @@
 ###
 
 SCOPES="$(echo $PATH | tr ':' '\n')"
-PREFIX="/usr/local"
-BINDIR="$PREFIX/bin"
+GITPREFIX="/usr"
+BINDIR="$GITPREFIX/bin"
 GIT="$BINDIR/git"
 ARGV=()
 
@@ -41,6 +41,11 @@ for ARG in "$@"; do
 					for PATHNAME in ${SCOPES[@]}; do
 						find -L $PATHNAME -maxdepth 1 \( -type f -o -type l \) -name "git-*" -exec test -x {} \; -exec ls {} \; 2>/dev/null ;
 					done
+
+					exit 0
+				;;
+				--path|-p)
+					echo "${BASH_SOURCE[0]}"
 
 					exit 0
 				;;
