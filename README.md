@@ -8,6 +8,8 @@
 - [Installation](#installation)
   + [Homebrew](#homebrew)
   + [Manual](#manual)
+    - [`make build`](#make-build)
+    - [`make install`](#make-install)
 - [Configuration](#configuration)
 - [Caveats](#caveats)
 - [Options](#options)
