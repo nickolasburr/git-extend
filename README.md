@@ -51,27 +51,43 @@ brew install git-extend
 
 ### Manual
 
+To ensure proper installation, please read this section in its entirety.
+
 ```
 git clone https://github.com/nickolasburr/git-extend.git
 cd git-extend
-make
+make build
 make install
 ```
 
-The install prefix is represented by `PREFIX`, and defaults to `/usr/local`. The following files and symlinks are installed in `PREFIX`:
+#### `make build`
 
+Instead of resolving `git` from the environment, `git-extend` sets an absolute path to invoke `git`. By default, the path is `/usr/bin/git`, and can be adjusted during the build stage.
+
+The `git` install prefix is represented by `GITPREFIX`, and defaults to `/usr`. This is the prefix where Git is installed and is typically `/usr` or `/usr/local`.
+
+For example, if your `git` executable is located at `/usr/local/bin/git`, you would run `make build GITPREFIX=/usr/local`. If your `git` executable is located at `/usr/bin/git`, then you can simply run `make build` or `make`.
+
+<strong>Important</strong>: If you don't have Git installed, you need to so before continuing. `git-extend` **does not** install Git for you.
+
+#### `make install`
+
+The `git-extend` install prefix is represented by `PREFIX`, and defaults to `/usr/local`.
+
+The following are installed and symlinked in `PREFIX`:
+
++ `$PREFIX/bin`
 + `$PREFIX/bin/git-extend`
 + `$PREFIX/bin/git-extend` -> `$PREFIX/bin/git`
-+ `$PREFIX/share/man/man1/git-extend.1.gz`
 
-You can install to an alternate location by passing `PREFIX` to `make install`. For example, `make install PREFIX=$HOME/.usr`.
+You can install to an alternate location by passing `PREFIX` to `make install`. For example, `make install PREFIX=/usr/local/git-extend`.
 
-<strong>Important</strong>: If a `git` executable is encountered during installation, the process will exit immediately. This will happen if:
+<strong>Important</strong>: Common issues which cause installation to exit prematurely include:
 
-+ You already have `git-extend` installed and symlinked at `$PREFIX/bin/git`. You can use `--force` to overwrite during installation. Be careful!
-+ You used `PREFIX` to specify an alternate location and a `git` executable is already installed there. In this case, simply install to a different location.
++ Installing `git-extend` to the same directory where `git` is installed. Remember, `git-extend` creates a `$PREFIX/bin/git-extend` -> `$PREFIX/bin/git` symlink, so `GITPREFIX` and `PREFIX` cannot be the same!
++ Installing to a directory that is not writable by the user. It is **not recommended** to install using `sudo`, but instead to pick an alternate location owned by the user.
 
-Once installed, verify `$PREFIX/bin` is added to your `PATH`. It is important `git-extend` is the **first `git` executable found in your `PATH`**. You can check this by running `type -all git`.
+Once installed, add `$PREFIX/bin` to your `PATH`. It is important `git-extend` is the **first** `git` executable resolved in your `PATH`. You can validate this by running `type -all git` or `git extend --path`.
 
 ## Configuration
 
