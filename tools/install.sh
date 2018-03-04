@@ -3,7 +3,6 @@
 set -ex
 
 PREFIX="$1"
-GITPREFIX="$2"
 
 if [[ ! -d "$PREFIX" ]]; then
 	echo "$PREFIX not found, creating..."
@@ -34,18 +33,7 @@ OPTIONS="-c"
 LN="/bin/ln"
 LNOPTS="-sf"
 
-CP="/bin/cp"
-CPOPTS="-rf"
-
-RM="/bin/rm"
-RMOPTS="-rf"
-
-SED="/usr/bin/sed"
-SEDOPTS="-i ''"
-SEDMATCH="s@$DEFDIR@$GITPREFIX@g"
-
 cd ..
 
-$SED $SEDOPTS $SEDMATCH "$SRCDIR/$TARGET"
 $INSTALL $OPTIONS "$SRCDIR/$TARGET" "$PREFIX/$BINDIR/$TARGET"
 $LN $LNOPTS "$PREFIX/$BINDIR/$TARGET" "$PREFIX/$BINDIR/$GIT"
