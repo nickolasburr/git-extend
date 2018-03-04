@@ -97,6 +97,8 @@ Below are important caveats and considerations to think about prior to installat
 + `--bypass`: Bypass all `git-extend` command wrappers.
 + `extend`: `git-extend` specific options.
   - `--list`, `-l`: List all `git-*` executables found in `PATH`.
+  - `--help`, `-h`: Show usage information.
+  - `--version`, `-V`: Show current version.
 
 ## Examples
 
