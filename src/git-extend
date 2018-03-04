@@ -10,12 +10,14 @@ BINDIR="$PREFIX/bin"
 GIT="$BINDIR/git"
 ARGV=()
 
+VERSION="1.0.0"
 read -r -d '' USAGE <<-EOS
   Usage: git extend [OPTIONS]
 
   OPTIONS:
-    --help, -h: Show usage information.
-    --list, -l: List all git-* executables found in PATH.
+    --list,    -l: List all git-* executables found in PATH.
+    --help,    -h: Show usage information.
+    --version, -V: Show current version.
 EOS
 
 for ARG in "$@"; do
@@ -27,6 +29,11 @@ for ARG in "$@"; do
 			case $1 in
 				--help|-h)
 					echo "$USAGE"
+
+					exit 0
+				;;
+				--version|-V)
+					echo "$VERSION"
 
 					exit 0
 				;;
