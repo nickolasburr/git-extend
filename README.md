@@ -81,10 +81,11 @@ For more details on command wrappers, see [Command Wrappers](#command-wrappers).
 
 ## Caveats
 
-Below are a few important caveats and considerations to think about prior to installation:
+Below are important caveats and considerations to think about prior to installation:
 
 + Use `git-extend` judiciously. It's lightweight - keep it that way.
 + Prefer Interrogators over Manipulators.
++ When building command wrappers, call `$GIT` instead of `git`. The `GIT` export provides git(1) options and arguments.
 + Keep command wrappers simple. Only add functionality you will actually use, and use frequently.
 + When adding user-defined options to a command wrapper, give it due diligence. **Don't add options already defined by the builtin.**
 + **Always** test command wrappers somewhere safe before using them in your workflow.
