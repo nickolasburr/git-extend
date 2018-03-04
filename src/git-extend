@@ -10,6 +10,14 @@ BINDIR="$PREFIX/bin"
 GIT="$BINDIR/git"
 ARGV=()
 
+read -r -d '' USAGE <<-EOS
+  Usage: git extend [OPTIONS]
+
+  OPTIONS:
+    --help, -h: Show usage information.
+    --list, -l: List all git-* executables found in PATH.
+EOS
+
 for ARG in "$@"; do
 	case $ARG in
 		extend)
@@ -17,9 +25,14 @@ for ARG in "$@"; do
 
 			# git-extend(1) specific options.
 			case $1 in
+				--help|-h)
+					echo "$USAGE"
+
+					exit 0
+				;;
 				--list|-l)
 					for PATHNAME in ${SCOPES[@]}; do
-						find -L $PATHNAME -mindepth 1 -maxdepth 1 \( -type f -o -type l \) -name "git-*" -exec test -x {} \; -exec ls {} \; 2>/dev/null ;
+						find -L $PATHNAME -maxdepth 1 \( -type f -o -type l \) -name "git-*" -exec test -x {} \; -exec ls {} \; 2>/dev/null ;
 					done
 
 					exit 0
