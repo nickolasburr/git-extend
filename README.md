@@ -85,11 +85,12 @@ Below are important caveats and considerations to think about prior to installat
 
 + Use `git-extend` judiciously. It's lightweight - keep it that way.
 + Prefer Interrogators over Manipulators.
-+ When building command wrappers, call `$GIT` instead of `git`. The `GIT` export provides git(1) options and arguments.
-+ Keep command wrappers simple. Only add functionality you will actually use, and use frequently.
-+ When adding user-defined options to a command wrapper, give it due diligence. **Don't add options already defined by the builtin.**
-+ **Always** test command wrappers somewhere safe before using them in your workflow.
-+ When in doubt, use `--bypass`. It's equivalent to calling the `git` executable directly. See [Examples](#examples) for usage.
++ When building command wrappers:
+  - Only add options and functionality you will _actually_ use, and use frequently.
+  - Use `$GIT` instead of `git`. The `GIT` export includes git(1) options and arguments.
+  - Give due diligence to user-defined options. **Don't add options already defined by the builtin.**
+  - **Always** test command wrappers somewhere safe before using them in your workflow.
++ When in doubt, use `--bypass`. It's equivalent to invoking `git` directly. See [Examples](#examples) for usage.
 
 ## Options
 
