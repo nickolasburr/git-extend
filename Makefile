@@ -3,6 +3,7 @@
 ###
 
 PREFIX ?= /usr/local
+GITPREFIX ?= /usr/local
 TOOLS  = tools
 
 .PHONY: all build install test uninstall
@@ -10,13 +11,13 @@ TOOLS  = tools
 all: build
 
 build:
-	@cd $(TOOLS) && ./build.sh $(PREFIX)
+	@cd $(TOOLS) && ./build.sh $(PREFIX) $(GITPREFIX)
 
 install:
-	@cd $(TOOLS) && ./install.sh $(PREFIX)
+	@cd $(TOOLS) && ./install.sh $(PREFIX) $(GITPREFIX)
 
 test:
-	@cd $(TOOLS) && ./test.sh $(PREFIX)
+	@cd $(TOOLS) && ./test.sh $(PREFIX) $(GITPREFIX)
 
 uninstall:
-	@cd $(TOOLS) && ./uninstall.sh $(PREFIX)
+	@cd $(TOOLS) && ./uninstall.sh $(PREFIX) $(GITPREFIX)
