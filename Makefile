@@ -11,13 +11,13 @@ TOOLS  = tools
 all: build
 
 build:
-	@cd $(TOOLS) && ./build.sh $(PREFIX) $(GITPREFIX)
+	@cd $(TOOLS) && ./build.sh $(GITPREFIX)
 
 install:
-	@cd $(TOOLS) && ./install.sh $(PREFIX) $(GITPREFIX)
+	@cd $(TOOLS) && ./install.sh $(PREFIX)
 
 test:
-	@cd $(TOOLS) && ./test.sh $(PREFIX) $(GITPREFIX)
+	@cd $(TOOLS) && ./test.sh $(PREFIX)
 
 uninstall:
-	@cd $(TOOLS) && ./uninstall.sh $(PREFIX) $(GITPREFIX)
+	@cd $(TOOLS) && ./uninstall.sh $(PREFIX)
