@@ -3,7 +3,7 @@
 ###
 
 PREFIX ?= /usr/local
-GITPREFIX ?= /usr/local
+GITPREFIX ?= /usr
 TOOLS  = tools
 
 .PHONY: all build install test uninstall
