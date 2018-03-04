@@ -58,7 +58,7 @@ make
 make install
 ```
 
-The install prefix is represented by `PREFIX`, and defaults to `/usr/local/git-extend`. The following files and symlinks are installed in `PREFIX`:
+The install prefix is represented by `PREFIX`, and defaults to `/usr/local`. The following files and symlinks are installed in `PREFIX`:
 
 + `$PREFIX/bin/git-extend`
 + `$PREFIX/bin/git-extend` -> `$PREFIX/bin/git`
