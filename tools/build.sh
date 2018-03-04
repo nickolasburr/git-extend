@@ -2,13 +2,23 @@
 
 set -ex
 
-PREFIX="$1"
+GITPREFIX="$1"
 
-if [[ ! -d "$PREFIX" ]]; then
-	printf '%s is not a valid directory.\n' "$PREFIX"
+if [[ ! -d "$GITPREFIX" ]]; then
+	echo "$GITPREFIX is not a valid directory."
 
 	exit 1
 fi
 
-SOURCE="git-extend"
-TARGET="git"
+TARGET="git-extend"
+SRCDIR="src"
+DEFDIR="/usr/local"
+
+SED="/usr/bin/sed"
+SEDOPTS="-i ''"
+SEDMATCH="s@$DEFDIR@$GITPREFIX@g"
+
+# Update PREFIX in git-extend, if needed.
+if [[ $GITPREFIX != $DEFDIR ]]; then
+	$SED $SEDOPTS $SEDMATCH "$SRCDIR/$TARGET"
+fi
