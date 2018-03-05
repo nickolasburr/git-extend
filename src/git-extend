@@ -16,6 +16,7 @@ read -r -d '' USAGE <<-EOS
 
   OPTIONS:
     --list,    -l: List all git-* executables found in PATH.
+    --path,    -p: Get absolute path to git symlink.
     --help,    -h: Show usage information.
     --version, -V: Show current version.
 EOS
