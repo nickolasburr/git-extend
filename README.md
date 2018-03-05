@@ -42,18 +42,16 @@ Hooks serve their purpose, but they're limited by design.
 
 <strong>Important</strong>: Please read the [Caveats](#caveats) section before continuing.
 
-Once you've read the **Caveats** section, you can install `git-extend` via Homebrew or manually.
-
-### Homebrew
+## Homebrew
 
 ```
 brew tap nickolasburr/pfa
 brew install git-extend
 ```
 
-### Manual
+## Manual
 
-To ensure proper installation, please read this section in its entirety.
+**To ensure proper installation, please read this section in its entirety.**
 
 ```
 git clone https://github.com/nickolasburr/git-extend.git
