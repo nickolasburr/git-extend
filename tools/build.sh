@@ -11,7 +11,7 @@ if [[ ! -d "$GITPREFIX" ]]; then
 fi
 
 TARGET="git-extend"
-SRCDIR="src"
+BINDIR="bin"
 DEFDIR="/usr/local"
 
 SED="/usr/bin/sed"
@@ -21,6 +21,4 @@ SEDMATCH="s@$DEFDIR@$GITPREFIX@g"
 cd ..
 
 # Update PREFIX in git-extend, if needed.
-if [[ $GITPREFIX != $DEFDIR ]]; then
-	eval "$SED $SEDOPTS $SEDMATCH $SRCDIR/$TARGET"
-fi
+[[ $GITPREFIX != $DEFDIR ]] && eval "$SED $SEDOPTS $SEDMATCH $BINDIR/$TARGET"

@@ -32,7 +32,6 @@ TARGET="git-extend"
 DEFDIR="/usr/local"
 BINDIR="bin"
 ETCDIR="etc"
-SRCDIR="src"
 
 [[ ! -d "$PREFIX/$BINDIR" ]] && mkdir -p "$PREFIX/$BINDIR" && echo -e "${GREEN}Successfully created ${PREFIX}/${BINDIR}${RESET}"
 [[ ! -d "$PREFIX/$ETCDIR" ]] && mkdir -p "$PREFIX/$ETCDIR" && echo -e "${GREEN}Successfully created ${PREFIX}/${ETCDIR}${RESET}"
@@ -51,5 +50,5 @@ LNOPTS="-sf"
 
 cd ..
 
-$INSTALL $OPTIONS "$SRCDIR/$TARGET" "$PREFIX/$BINDIR/$TARGET"
+$INSTALL $OPTIONS "$BINDIR/$TARGET" "$PREFIX/$BINDIR/$TARGET"
 $LN $LNOPTS "$PREFIX/$BINDIR/$TARGET" "$PREFIX/$BINDIR/$GIT"
