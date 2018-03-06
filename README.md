@@ -62,17 +62,23 @@ make install
 
 #### `make build`
 
-Instead of resolving `git` from the environment, `git-extend` sets an absolute path to invoke `git`. By default, the path is `/usr/bin/git`, and can be adjusted during the build stage.
+`git-extend` uses an absolute path to invoke `git`. By default, the path is `/usr/bin/git`.
 
-The `git` install prefix is represented by `GITPREFIX`, and defaults to `/usr`. This is the prefix where Git is installed and is typically `/usr` or `/usr/local`.
+The install prefix for `git` is represented by `GITPREFIX`, and defaults to `/usr`. Git is typically installed under `/usr` and/or `/usr/local`.
 
-For example, if your `git` executable is located at `/usr/local/bin/git`, you would run `make build GITPREFIX=/usr/local`. If your `git` executable is located at `/usr/bin/git`, then you can simply run `make build` or `make`.
+As an example, if your `git` executable is located at `/usr/local/bin/git`, you would run:
+
+```
+make build GITPREFIX=/usr/local
+```
+
+If your `git` executable is located at `/usr/bin/git`, then you can simply run `make`.
 
 <strong>Important</strong>: If you don't have Git installed, you need to so before continuing. `git-extend` **does not** install Git for you.
 
 #### `make install`
 
-The `git-extend` install prefix is represented by `PREFIX`, and defaults to `/usr/local`.
+The install prefix for `git-extend` is represented by `PREFIX`, and defaults to `/usr/local`.
 
 The following are installed and symlinked in `PREFIX`:
 
