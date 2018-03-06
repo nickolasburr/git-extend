@@ -51,8 +51,6 @@ brew install git-extend
 
 ## Manual
 
-**To ensure proper installation, please read this section in its entirety.**
-
 ```
 git clone https://github.com/nickolasburr/git-extend.git
 cd git-extend
@@ -60,19 +58,28 @@ make build
 make install
 ```
 
+Outlined below are the two (2) `make` steps needed for installation:
+
++ `make build`
++ `make install`
+
 #### `make build`
 
-Instead of resolving `git` from the environment, `git-extend` sets an absolute path to invoke `git`. By default, the path is `/usr/bin/git`, and can be adjusted during the build stage.
+`git-extend` uses an absolute path to invoke `git`. By default, the path is `/usr/bin/git`, and can be modified at build.
 
-The `git` install prefix is represented by `GITPREFIX`, and defaults to `/usr`. This is the prefix where Git is installed and is typically `/usr` or `/usr/local`.
+The install prefix for `git` is represented by `GITPREFIX`, and defaults to `/usr`. Git is typically installed under `/usr` and/or `/usr/local`.
 
-For example, if your `git` executable is located at `/usr/local/bin/git`, you would run `make build GITPREFIX=/usr/local`. If your `git` executable is located at `/usr/bin/git`, then you can simply run `make build` or `make`.
+As an example, if the executable is located at `/usr/local/bin/git`, run:
 
-<strong>Important</strong>: If you don't have Git installed, you need to so before continuing. `git-extend` **does not** install Git for you.
+```
+make build GITPREFIX=/usr/local
+```
+
+If the executable is located at `/usr/bin/git`, then simply run `make`.
 
 #### `make install`
 
-The `git-extend` install prefix is represented by `PREFIX`, and defaults to `/usr/local`.
+The install prefix for `git-extend` is represented by `PREFIX`, and defaults to `/usr/local`.
 
 The following are installed and symlinked in `PREFIX`:
 
@@ -80,9 +87,11 @@ The following are installed and symlinked in `PREFIX`:
 + `$PREFIX/bin/git-extend`
 + `$PREFIX/bin/git-extend` -> `$PREFIX/bin/git`
 
-You can install to an alternate location by passing `PREFIX` to `make install`. For example, `make install PREFIX=/usr/local/git-extend`.
+To install `git-extend` under an alternate prefix, pass `PREFIX` to `make install`.
 
-<strong>Important</strong>: Common issues which cause installation to exit prematurely include:
+## Pitfalls
+
+Common pitfalls to be mindful of:
 
 + Installing `git-extend` to the same directory where `git` is installed. Remember, `git-extend` creates a `$PREFIX/bin/git-extend` -> `$PREFIX/bin/git` symlink, so `GITPREFIX` and `PREFIX` cannot be the same!
 + Installing to a directory that is not writable by the user. It is **not recommended** to install using `sudo`, but instead to pick an alternate location owned by the user.
