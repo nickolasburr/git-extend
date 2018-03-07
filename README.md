@@ -24,19 +24,19 @@ Now, you may ask yourself:
 
 > How is this different from using git-config variables?
 
-With git-config, variables are limited and predetermined. With `git-extend`, you augment Git builtins with any options and functionality _you want_.
+`git-config` variables are limited and predetermined. With `git-extend`, you augment Git builtins with any options and functionality _you want_.
 
 > What advantages does git-extend provide that I can't get from git-config?
 
-With git-config, you're confined to variables set forth for the builtin. There is no builtin override, so the alternative is to define an alias. With `git-extend`, user-defined options and functionality sit above the Git builtin, allowing you to control behavior as you see fit.
+With `git-config`, you're confined to variables designated for the builtin. There is no builtin override, so the alternative is to define an alias. With `git-extend`, user-defined options and functionality sit above the Git builtin, allowing you to control behavior as you see fit.
 
 > What advantages does git-extend provide that I can't get from a shell alias? Or a shell function?
 
-A shell alias is just that - an alias you have to remember or look up. A shell function works, but isn't very scalable.
+A shell alias is just that - an alias you have to remember, or look up. A shell function works, but isn't truly scalable.
 
 > Why not make use of hooks?
 
-Hooks serve their purpose, but they're limited by design.
+Hooks are great for certain actions, but are limited by design.
 
 ## Installation
 
