@@ -29,7 +29,7 @@ fi
 GIT="git"
 TARGET="git-extend"
 
-DEFDIR="/usr"
+DEFDIR="/usr/local"
 BINDIR="bin"
 ETCDIR="etc"
 
