@@ -1,6 +1,6 @@
 # git-extend(1)
 
-`git-extend` is a featherweight wrapper for Git builtins.
+`git-extend` is an interface for extending Git builtins.
 
 ## Table of Contents
 
