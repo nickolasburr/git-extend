@@ -12,7 +12,7 @@ fi
 
 TARGET="git-extend"
 BINDIR="bin"
-DEFDIR="/usr/local"
+DEFDIR="/usr"
 
 SED="/usr/bin/sed"
 SEDOPTS="-i ''"
