@@ -5,7 +5,7 @@ set -ex
 PREFIX="$1"
 
 if [[ ! -d "$PREFIX" ]]; then
-	echo "$PREFIX is not a valid directory. Exiting..."
+	echo "$PREFIX is not a valid prefix. Exiting..."
 
 	exit 1
 fi
