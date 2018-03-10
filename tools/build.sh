@@ -17,9 +17,9 @@ DEFDIR="/usr"
 
 SED="/usr/bin/sed"
 SEDOPTS="-i ''"
-SEDMATCH="s@$DEFDIR@$GITPREFIX@g"
+SEDMATCH="s@GITPREFIX=\"$DEFDIR\"@GITPREFIX=\"$GITPREFIX\"@g"
 
 cd ..
 
 # Update GITPREFIX in git-extend, if needed.
-[[ $GITPREFIX != $DEFDIR ]] && eval "$SED $SEDOPTS $SEDMATCH $BINDIR/$TARGET"
+[[ $GITPREFIX != $DEFDIR ]] && $SED $SEDOPTS $SEDMATCH "$BINDIR/$TARGET"
