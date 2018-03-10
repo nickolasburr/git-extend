@@ -44,6 +44,8 @@ Hooks are great for certain actions, but are limited by design.
 
 ## Homebrew
 
+The Homebrew formula for `git-extend` is keg-only.
+
 ```
 brew tap nickolasburr/pfa
 brew install git-extend
