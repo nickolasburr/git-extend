@@ -79,7 +79,7 @@ if [[ -n $TLPID ]] && [[ $TLPID -eq $PPID ]]; then
 fi
 
 if [[ -n $BYPASS ]] && [[ $BYPASS -eq 1 ]]; then
-	$GIT "$@"
+	exec $GIT "$@"
 
 	exit $?
 fi
@@ -110,7 +110,7 @@ for PATHNAME in ${SCOPES[@]}; do
 			export GIT="$GIT ${@:1:COUNT}"
 
 			# Execute $TARGET with command-specific arguments only.
-			$TARGET "${ARGV[@]:1}"
+			exec $TARGET "${ARGV[@]:1}"
 
 			exit $?
 		fi
@@ -120,4 +120,4 @@ for PATHNAME in ${SCOPES[@]}; do
 	done
 done
 
-$GIT "$@"
+exec $GIT "$@"
