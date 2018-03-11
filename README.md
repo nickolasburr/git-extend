@@ -49,7 +49,7 @@ brew tap nickolasburr/pfa
 brew install git-extend
 ```
 
-The above formula is [keg-only](https://docs.brew.sh/FAQ#what-does-keg-only-mean). To use `git-extend`, add `/usr/local/opt/git-extend/bin` to your `PATH`.
+To minimize conflicts, the formula is [keg-only](https://docs.brew.sh/FAQ#what-does-keg-only-mean). Once installed, add `/usr/local/opt/git-extend/bin` to your `PATH`.
 
 ## Manual
 
