@@ -1,6 +1,6 @@
 # git-extend(1)
 
-`git-extend` is an interface for extending Git builtins.
+`git-extend` is a CLI for extending Git builtins.
 
 ## Table of Contents
 
@@ -24,7 +24,7 @@ Now, you may ask yourself:
 
 > How is this different from using git-config variables?
 
-`git-config` variables are limited and predetermined. With `git-extend`, you augment Git builtins with any options and functionality _you want_.
+`git-config` variables are predetermined. `git-extend` augments Git builtins with options and functionality _you want_.
 
 > What advantages does git-extend provide that I can't get from git-config?
 
@@ -40,16 +40,16 @@ Hooks are great for certain actions, but are limited by design.
 
 ## Installation
 
-<strong>Important</strong>: Please read the [Caveats](#caveats) section before continuing.
+### Important: Please read the [Caveats](#caveats) section before continuing.
 
 ## Homebrew
-
-The Homebrew formula for `git-extend` is keg-only.
 
 ```
 brew tap nickolasburr/pfa
 brew install git-extend
 ```
+
+To minimize conflicts, the formula is [keg-only](https://docs.brew.sh/FAQ#what-does-keg-only-mean). Once installed, add `/usr/local/opt/git-extend/bin` to your `PATH`.
 
 ## Manual
 
