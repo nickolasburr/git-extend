@@ -5,6 +5,7 @@
 ## Table of Contents
 
 - [Description](#description)
+- [FAQs](#faqs)
 - [Installation](#installation)
   + [Homebrew](#homebrew)
   + [Manual](#manual)
@@ -20,7 +21,7 @@
 
 `git-extend` extends Git builtins via [command wrappers](#command-wrappers). Simply put, it provides an interface for user-defined functionality.
 
-Now, you may ask yourself:
+## FAQs
 
 > How is this different from using git-config variables?
 
