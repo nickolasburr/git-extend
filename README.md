@@ -86,9 +86,9 @@ The install prefix for `git-extend` is represented by `PREFIX`, and defaults to 
 
 The following are installed and symlinked in `PREFIX`:
 
-+ `$PREFIX`/bin
-+ `$PREFIX`/bin/git-extend
-+ `$PREFIX`/bin/git-extend -> `$PREFIX`/bin/git
++ _`$PREFIX`/bin_
++ _`$PREFIX`/bin/git-extend_
++ _`$PREFIX`/bin/git-extend_ -> _`$PREFIX`/bin/git_
 
 To install `git-extend` under an alternate prefix, pass `PREFIX` to `make install`.
 
@@ -96,10 +96,10 @@ To install `git-extend` under an alternate prefix, pass `PREFIX` to `make instal
 
 Common pitfalls to be mindful of:
 
-+ Installing `git-extend` to the same directory where `git` is installed. Remember, `git-extend` creates a `$PREFIX`/bin/git-extend -> `$PREFIX`/bin/git symlink, so `GITPREFIX` and `PREFIX` cannot be the same!
++ Installing `git-extend` to the same directory where `git` is installed. `git-extend` creates a symlink to `git`, so `GITPREFIX` and `PREFIX` cannot be the same.
 + Installing to a directory that is not writable by the user. It is **not recommended** to install using `sudo`, but instead to pick an alternate location owned by the user.
 
-Once installed, add `$PREFIX`/bin to your `PATH`. It is important `git-extend` is the **first** `git` executable resolved in your `PATH`. You can validate this by running `type -all git` or `git extend --path`.
+Once installed, add _`$PREFIX`/bin_ to your `PATH`. It is important for the `git-extend` symlink to be the **first** `git` resolved in your `PATH`. You can validate this by running `type -all git` or `git extend --path`.
 
 ## Configuration
 
