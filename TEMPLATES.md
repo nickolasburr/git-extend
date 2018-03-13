@@ -73,7 +73,7 @@ Template files are located in the [templates](https://github.com/nickolasburr/gi
       ```
 
 + **`git-status`**
-  - `--numbered`, `-N`: Get an ordered list of unstaged and untracked files in the worktree. Intended to be used with [`git-add`](#git-add).
+  - `--numbered`, `-N`: Get a list of unstaged and untracked files in the worktree. Intended to be used with [`git-add`](#git-add).
 
     ```
     git status --numbered
