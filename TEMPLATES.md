@@ -1,13 +1,8 @@
 # Command Wrapper Templates
 
-Below is a list of pre-built command wrappers that illustrate how `git-extend` works. You can find them in the [templates](https://github.com/nickolasburr/git-extend/tree/master/templates) directory.
+Below is a list of pre-built command wrappers with example usage, to help illustrate how `git-extend` works.
 
-## Option Types
-
-+ **Builtin:**
-  - Git builtin options given to `git` via the command wrapper. You can add/modify/remove them to your liking.
-+ **User:**
-  - User-defined options which augment input given to `git` via the command wrapper. **Use unique option names to avoid conflicts.**
+Template files are located in the [templates](https://github.com/nickolasburr/git-extend/tree/master/templates) directory.
 
 ## Pre-built Templates
 
@@ -19,123 +14,71 @@ Below is a list of pre-built command wrappers that illustrate how `git-extend` w
 - [`git-reflog`](#git-reflog)
 - [`git-status`](#git-status)
 
-### `git-add`
+## Usage
 
-+ `%n`: Add pathspec at index `n`, referenced via the list derived from [`git status --numbered`](https://github.com/nickolasburr/git-extend/blob/master/templates/git-status#L19-L36). Index starts at `1`.
++ **`git-add`**
+  - `%n`: Add pathspec at index `n`, referenced via the list derived from [`git status --numbered`](https://github.com/nickolasburr/git-extend/blob/master/templates/git-status#L19-L36). Index starts at `1`.
 
-**Usage:**
+    ```
+    git add %1
+    ```
 
-```
-git add %1
-```
-
----
-
-### `git-branch`
-
-#### _Options_
-
-+ **Builtin**
-  - _none_
-+ **User**
++ **`git-branch`**
   - `--last`, `-L`: Get the name of the last branch.
 
-**Usage:**
+    ```
+    git branch --last
+    # -> fix/bug
+    ```
 
-```
-git branch --last
-# -> fix/bug
-```
++ **`git-diff`**
+  - `--sxs`: Show side-by-side diff.
 
----
+    ```
+    git diff --sxs
+    ```
 
-### `git-diff`
++ **`git-log`**
+  - `--all`: Get all commits (equivalent to `--max-count=<TOTAL>`).
 
-#### _Options_
+    ```
+    git log --all
+    ```
 
-+ **Builtin**
-  - `--color-words`
-  - `--minimal`
-+ **User**
-  - _none_
+  - `--last`: Get last `n` commits (equivalent to `--max-count=<NUMBER>`).
 
----
+    ```
+    git log --last 15
+    ```
 
-### `git-log`
-
-#### _Options_
-
-+ **Builtin**
-  - `--graph`
-  - `--abbrev-commit`
-  - `--date=relative`
-  - `--format="%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset"`
-  - `--max-count=10`
-+ **User**
-  - `--all`: Get all commits (overrides initial `--max-count=$NUM`).
-  - `--last`: Get last `n` commits (overrides initial `--max-count=$TOTAL`).
-
-**Usage:**
-
-```
-git log --last 15
-```
-
----
-
-### `git-merge`
-
-#### _Options_
-
-+ **Builtin**
-  - _none_
-+ **User**
++ **`git-merge`**
   - `--trim`, `-T`: Delete the previous branch after a successful merge (if applicable).
 
-**Usage:**
+    ```
+    git merge --no-ff --trim -
+    ```
 
-```
-git merge --no-ff --trim -
-```
++ **`git-reflog`**
+  - `show`:
+    + `--all`: Get all commits (equivalent to `--max-count=<TOTAL>`).
 
----
+      ```
+      git reflog show --all
+      ```
 
-### `git-reflog`
+    + `--last`: Get last `n` commits (equivalent to `--max-count=<NUMBER>`).
 
-#### _Options_
+      ```
+      git reflog show --last 15
+      ```
 
-+ **Builtin**
-  - `--abbrev-commit`
-  - `--date=relative`
-  - `--format="%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset"`
-  - `--max-count=10`
-+ **User**
-  - `--all`: Get all commits (overrides initial `--max-count=$NUM`).
-  - `--last`: Get last `n` commits (overrides initial `--max-count=$TOTAL`).
++ **`git-status`**
+  - `--numbered`, `-N`: Get a list of unstaged and untracked files in the worktree. Intended to be used with [`git-add`](#git-add).
 
-**Usage:**
+    ```
+    git status --numbered
 
-```
-git reflog --all
-```
-
----
-
-### `git-status`
-
-#### _Options_
-
-+ **Builtin**
-  - _none_
-+ **User**
-  - `--numbered`, `-N`: Get an ordered list of unstaged and untracked files in the worktree. Intended to be used with [`git-add`](#git-add).
-
-**Usage:**
-
-```
-git status --numbered
-
-# -> 1. M apply.c
-     2. M merge.c
-     3. ?? rebase.c
-```
+    # -> 1. M apply.c
+         2. M merge.c
+         3. ?? rebase.c
+    ```
