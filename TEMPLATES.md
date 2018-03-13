@@ -15,7 +15,7 @@ Template files are located in the [templates](https://github.com/nickolasburr/gi
 - [`git-status`](#git-status)
 
 1. **`git-add`**
-  + `%n`: Add pathspec at index `n`, referenced via the list derived from [`git status --numbered`](https://github.com/nickolasburr/git-extend/blob/master/templates/git-status#L19-L36). Index starts at `1`.
+    + `%n`: Add pathspec at index `n`, referenced via the list derived from [`git status --numbered`](https://github.com/nickolasburr/git-extend/blob/master/templates/git-status#L19-L36). Index starts at `1`.
 
     ```
     git add %1
