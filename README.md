@@ -15,11 +15,12 @@
 - [Caveats](#caveats)
 - [Options](#options)
 - [Examples](#examples)
-- [Command Wrappers](#command-wrappers)
+- [Closures](#closures)
+- [Notes](#notes)
 
 ## Description
 
-`git-extend` extends Git builtins via [command wrappers](#command-wrappers). Simply put, it provides an interface for user-defined functionality.
+`git-extend` extends Git builtins via [closures](#closures)<sup>1</sup>. Simply put, it provides an interface for user-defined functionality.
 
 ## FAQs
 
@@ -107,9 +108,9 @@ Once installed, add `$PREFIX/bin` to your `PATH`. It is important for the `git-e
 
 ## Configuration
 
-Configuration is straightforward. To use a command wrapper, name the file accordingly, add it anywhere in your `PATH`, and make it executable.
+Configuration is straightforward. To use a command closure, name the file accordingly, add it to your `PATH`, and make it executable.
 
-For more details on command wrappers, see [Command Wrappers](#command-wrappers).
+For more details on closures, see [Closures](#closures).
 
 ## Caveats
 
@@ -117,18 +118,18 @@ Below are important caveats and considerations to think about prior to installat
 
 + Use `git-extend` judiciously. It's lightweight - keep it that way.
 + Prefer Interrogators over Manipulators.
-+ When building command wrappers:
++ When building command closures:
   - Only add options and functionality you will _actually_ use, and use frequently.
   - Use `$GIT` instead of `git`. The `GIT` export includes git(1) options and arguments (e.g. `git -C /path/to/repo`).
   - Give due diligence to user-defined options. **Don't add options already defined by the builtin.**
-  - **Always** test command wrappers somewhere safe before using them in your workflow.
+  - **Always** test command closures somewhere safe before using them in your workflow.
 + When in doubt, use `--bypass`. It's equivalent to invoking `git` directly. See [Examples](#examples) for usage.
 
 ## Options
 
-+ `--bypass`: Bypass all `git-extend` command wrappers.
++ `--bypass`: Invoke `git` directly.
 + `extend`: `git-extend` specific options.
-  - `--list`, `-l`: List all `git-*` executables found in `PATH`.
+  - `--list`, `-l`: List all `git-*` executables found in `PATH`<sup>2</sup>.
   - `--path`, `-p`: Get absolute path to `git` symlink.
   - `--help`, `-h`: Show usage information.
   - `--version`, `-V`: Show current version.
@@ -147,7 +148,7 @@ Below are important caveats and considerations to think about prior to installat
     git add %1
     ```
 
-3. Bypass `git-log` wrapper and get the last five log entries.
+3. Bypass `git-log` command closure and get the last five log entries.
 
     ```
     git --bypass log --max-count=5
@@ -160,11 +161,11 @@ Below are important caveats and considerations to think about prior to installat
     git merge --no-ff --trim -
     ```
 
-## Command Wrappers
+## Closures
 
-As one might anticipate, a command wrapper is an executable script with the equivalent name of its Git builtin counterpart. For example, `git-log` for `git log`, `git-add` for `git add`, and so on.
+A command closure is an executable script that provides additional context when invoking a Git builtin. In order for `git-extend` to use a closure, the filename must correspond to the builtin. For example, `git-log` for `git log`, `git-add` for `git add`, and so on.
 
-However, command wrappers are not limited to Git builtins. You can also create arbitrary Git commands using the same conventions, and `git-extend` will resolve the command accordingly.
+While the aim is to augment existing commands, closures are not limited to builtins. You can create arbitrary Git commands using these conventions, and `git-extend` will handle accordingly.
 
 Templates are provided for several porcelain commands, including:
 
@@ -176,4 +177,9 @@ Templates are provided for several porcelain commands, including:
 + `git-reflog`
 + `git-status`
 
-For a complete list of pre-built wrappers, see [TEMPLATES](https://github.com/nickolasburr/git-extend/blob/master/TEMPLATES.md).
+For a complete list of pre-built command closures, see [TEMPLATES](https://github.com/nickolasburr/git-extend/blob/master/TEMPLATES.md).
+
+## Notes
+
+1. The term _closure_ is used loosely within the context of `git-extend`. Think of closure in terms of an executable as a function.
+2. A typical Git installation includes shell scripts, which may show when running `git extend --list`.
