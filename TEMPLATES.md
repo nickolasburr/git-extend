@@ -1,6 +1,6 @@
-# Command Wrapper Templates
+# Command Closure Templates
 
-Below is a list of pre-built command wrappers with example usage, to help illustrate how `git-extend` works.
+Below is a list of pre-built command closures with example usage, to help illustrate how `git-extend` works.
 
 Template files are located in the [templates](https://github.com/nickolasburr/git-extend/tree/master/templates) directory.
 
