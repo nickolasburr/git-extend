@@ -4,13 +4,6 @@ Below is a list of pre-built command wrappers with example usage, to help illust
 
 Template files are located in the [templates](https://github.com/nickolasburr/git-extend/tree/master/templates) directory.
 
-## Option Types
-
-+ **Builtin:**
-  - Git builtin options given to `git` via the command wrapper. You can add/modify/remove them to your liking.
-+ **User:**
-  - User-defined options which augment input given to `git` via the command wrapper. **Use unique option names to avoid conflicts.**
-
 ## Pre-built Templates
 
 - [`git-add`](#git-add)
@@ -21,123 +14,65 @@ Template files are located in the [templates](https://github.com/nickolasburr/gi
 - [`git-reflog`](#git-reflog)
 - [`git-status`](#git-status)
 
-### `git-add`
+1. **`git-add`**
 
-+ `%n`: Add pathspec at index `n`, referenced via the list derived from [`git status --numbered`](https://github.com/nickolasburr/git-extend/blob/master/templates/git-status#L19-L36). Index starts at `1`.
+    + `%n`: Add pathspec at index `n`, referenced via the list derived from [`git status --numbered`](https://github.com/nickolasburr/git-extend/blob/master/templates/git-status#L19-L36). Index starts at `1`.
 
-**Usage:**
+    ```
+    git add %1
+    ```
 
-```
-git add %1
-```
+2. **`git-branch`**
 
----
+    + `--last`, `-L`: Get the name of the last branch.
 
-### `git-branch`
+    ```
+    git branch --last
+    # -> fix/bug
+    ```
 
-#### _Options_
+3. **`git-diff`**
 
-+ **Builtin**
-  - _none_
-+ **User**
-  - `--last`, `-L`: Get the name of the last branch.
+    + `--sxs`: Show side-by-side diff.
 
-**Usage:**
+    ```
+    git diff --sxs
+    ```
 
-```
-git branch --last
-# -> fix/bug
-```
+4. **`git-log`**
 
----
+    + `--all`: Get all commits (overrides initial `--max-count=$NUM`).
+    + `--last`: Get last `n` commits (overrides initial `--max-count=$TOTAL`).
 
-### `git-diff`
+    ```
+    git log --last 15
+    ```
 
-#### _Options_
+5. **`git-merge`**
 
-+ **Builtin**
-  - `--color-words`
-  - `--minimal`
-+ **User**
-  - _none_
+    + `--trim`, `-T`: Delete the previous branch after a successful merge (if applicable).
 
----
+    ```
+    git merge --no-ff --trim -
+    ```
 
-### `git-log`
+6. **`git-reflog`**
 
-#### _Options_
+    + `--all`: Get all commits (overrides initial `--max-count=$NUM`).
+    + `--last`: Get last `n` commits (overrides initial `--max-count=$TOTAL`).
 
-+ **Builtin**
-  - `--graph`
-  - `--abbrev-commit`
-  - `--date=relative`
-  - `--format="%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset"`
-  - `--max-count=10`
-+ **User**
-  - `--all`: Get all commits (overrides initial `--max-count=$NUM`).
-  - `--last`: Get last `n` commits (overrides initial `--max-count=$TOTAL`).
+    ```
+    git reflog --all
+    ```
 
-**Usage:**
+7. **`git-status`**
 
-```
-git log --last 15
-```
+    + `--numbered`, `-N`: Get an ordered list of unstaged and untracked files in the worktree. Intended to be used with [`git-add`](#git-add).
 
----
+    ```
+    git status --numbered
 
-### `git-merge`
-
-#### _Options_
-
-+ **Builtin**
-  - _none_
-+ **User**
-  - `--trim`, `-T`: Delete the previous branch after a successful merge (if applicable).
-
-**Usage:**
-
-```
-git merge --no-ff --trim -
-```
-
----
-
-### `git-reflog`
-
-#### _Options_
-
-+ **Builtin**
-  - `--abbrev-commit`
-  - `--date=relative`
-  - `--format="%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset"`
-  - `--max-count=10`
-+ **User**
-  - `--all`: Get all commits (overrides initial `--max-count=$NUM`).
-  - `--last`: Get last `n` commits (overrides initial `--max-count=$TOTAL`).
-
-**Usage:**
-
-```
-git reflog --all
-```
-
----
-
-### `git-status`
-
-#### _Options_
-
-+ **Builtin**
-  - _none_
-+ **User**
-  - `--numbered`, `-N`: Get an ordered list of unstaged and untracked files in the worktree. Intended to be used with [`git-add`](#git-add).
-
-**Usage:**
-
-```
-git status --numbered
-
-# -> 1. M apply.c
-     2. M merge.c
-     3. ?? rebase.c
-```
+    # -> 1. M apply.c
+         2. M merge.c
+         3. ?? rebase.c
+    ```
