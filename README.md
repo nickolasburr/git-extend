@@ -181,5 +181,5 @@ For a complete list of pre-built command closures, see [TEMPLATES](https://githu
 
 ## Notes
 
-1. The term _closure_ is used loosely within the context of `git-extend`. Think of closure in terms of an executable as a function.
+1. The term _closure_ is used loosely in the context of `git-extend`. Think closure in terms of an executable as a function.
 2. A typical Git installation includes shell scripts, which may show when running `git extend --list`.
