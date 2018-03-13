@@ -39,9 +39,9 @@ A shell alias is just that - an alias you have to remember, or look up. A shell 
 
 Hooks are great for certain actions, but are predetermined and, therefore, limited.
 
-> Can I still use the builtin options for the command?
+> Can I still use builtin options for the command?
 
-Absolutely. That's the entire point of `git-extend`. In essence, it can be thought of as a closure providing _additional_ options and functionality.
+Absolutely. That's the point of `git-extend`. It can be thought of as a type of closure, providing _additional_ options and functionality.
 
 ## Installation
 
