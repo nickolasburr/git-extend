@@ -35,9 +35,13 @@ With `git-config`, you're confined to variables designated for the builtin. Ther
 
 A shell alias is just that - an alias you have to remember, or look up. A shell function works, but isn't truly scalable.
 
-> Why not make use of hooks?
+> What about hooks?
 
-Hooks are great for certain actions, but are limited by design.
+Hooks are great for certain actions, but are predetermined and, therefore, limited.
+
+> Can I still use the builtin options for the command?
+
+Absolutely. That's the entire point of `git-extend`. In essence, it can be thought of as a closure providing _additional_ options and functionality.
 
 ## Installation
 
