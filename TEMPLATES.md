@@ -15,16 +15,14 @@ Template files are located in the [templates](https://github.com/nickolasburr/gi
 - [`git-status`](#git-status)
 
 1. **`git-add`**
-
-    + `%n`: Add pathspec at index `n`, referenced via the list derived from [`git status --numbered`](https://github.com/nickolasburr/git-extend/blob/master/templates/git-status#L19-L36). Index starts at `1`.
+  + `%n`: Add pathspec at index `n`, referenced via the list derived from [`git status --numbered`](https://github.com/nickolasburr/git-extend/blob/master/templates/git-status#L19-L36). Index starts at `1`.
 
     ```
     git add %1
     ```
 
 2. **`git-branch`**
-
-    + `--last`, `-L`: Get the name of the last branch.
+  + `--last`, `-L`: Get the name of the last branch.
 
     ```
     git branch --last
@@ -32,42 +30,37 @@ Template files are located in the [templates](https://github.com/nickolasburr/gi
     ```
 
 3. **`git-diff`**
-
-    + `--sxs`: Show side-by-side diff.
+  + `--sxs`: Show side-by-side diff.
 
     ```
     git diff --sxs
     ```
 
 4. **`git-log`**
-
-    + `--all`: Get all commits (overrides initial `--max-count=$NUM`).
-    + `--last`: Get last `n` commits (overrides initial `--max-count=$TOTAL`).
+  + `--all`: Get all commits (overrides initial `--max-count=$NUM`).
+  + `--last`: Get last `n` commits (overrides initial `--max-count=$TOTAL`).
 
     ```
     git log --last 15
     ```
 
 5. **`git-merge`**
-
-    + `--trim`, `-T`: Delete the previous branch after a successful merge (if applicable).
+  + `--trim`, `-T`: Delete the previous branch after a successful merge (if applicable).
 
     ```
     git merge --no-ff --trim -
     ```
 
 6. **`git-reflog`**
-
-    + `--all`: Get all commits (overrides initial `--max-count=$NUM`).
-    + `--last`: Get last `n` commits (overrides initial `--max-count=$TOTAL`).
+  + `--all`: Get all commits (overrides initial `--max-count=$NUM`).
+  + `--last`: Get last `n` commits (overrides initial `--max-count=$TOTAL`).
 
     ```
     git reflog --all
     ```
 
 7. **`git-status`**
-
-    + `--numbered`, `-N`: Get an ordered list of unstaged and untracked files in the worktree. Intended to be used with [`git-add`](#git-add).
+  + `--numbered`, `-N`: Get an ordered list of unstaged and untracked files in the worktree. Intended to be used with [`git-add`](#git-add).
 
     ```
     git status --numbered
