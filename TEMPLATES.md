@@ -62,15 +62,15 @@ Template files are located in the [templates](https://github.com/nickolasburr/gi
   - `show`:
     + `--all`: Get all commits (equivalent to `--max-count=<TOTAL>`).
 
-    ```
-    git reflog show --all
-    ```
+      ```
+      git reflog show --all
+      ```
 
     + `--last`: Get last `n` commits (equivalent to `--max-count=<NUMBER>`).
 
-    ```
-    git reflog show --last 15
-    ```
+      ```
+      git reflog show --last 15
+      ```
 
 + **`git-status`**
   - `--numbered`, `-N`: Get an ordered list of unstaged and untracked files in the worktree. Intended to be used with [`git-add`](#git-add).
