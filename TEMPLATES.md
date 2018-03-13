@@ -1,6 +1,8 @@
 # Command Wrapper Templates
 
-Below is a list of pre-built command wrappers that illustrate how `git-extend` works. You can find them in the [templates](https://github.com/nickolasburr/git-extend/tree/master/templates) directory.
+Below is a list of pre-built command wrappers with example usage, to help illustrate how `git-extend` works.
+
+Template files are located in the [templates](https://github.com/nickolasburr/git-extend/tree/master/templates) directory.
 
 ## Option Types
 
