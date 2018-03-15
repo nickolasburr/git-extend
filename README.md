@@ -116,14 +116,14 @@ For more details on closures, see [Closures](#closures).
 
 Below are important caveats and considerations to think about prior to installation:
 
-+ Use `git-extend` judiciously. It's lightweight - keep it that way.
++ Use `git-extend` judiciously. It's lightweight but powerful.
++ When in doubt, use `--bypass`. It's equivalent to invoking `git` directly. See [Examples](#examples) for usage.
 + Prefer Interrogators over Manipulators.
 + When building command closures:
-  - Only add options and functionality you will _actually_ use, and use frequently.
-  - Use `$GIT` instead of `git`. The `GIT` export includes git(1) options and arguments (e.g. `git -C /path/to/repo`).
-  - Give due diligence to user-defined options. **Don't add options already defined by the builtin.**
+  - Only add options and functionality you will _actually_ use, and use _frequently_.
+  - Invoke `$GIT`, not `git`. The `GIT` export includes git(1) options and arguments (e.g. `git -C /path/to/repo ...`).
+  - Give due diligence to user-defined options. **Don't add options defined by the builtin.**
   - **Always** test command closures somewhere safe before using them in your workflow.
-+ When in doubt, use `--bypass`. It's equivalent to invoking `git` directly. See [Examples](#examples) for usage.
 
 ## Options
 
