@@ -17,7 +17,7 @@ Template files are located in the [templates](https://github.com/nickolasburr/gi
 ## Usage
 
 + **`git-add`**
-  - `%n`: Add pathspec at index `n`, referenced via the list derived from [`git status --numbered`](https://github.com/nickolasburr/git-extend/blob/master/templates/git-status#L19-L36). Index starts at `1`.
+  - `%n`: Add pathspec at index `n`, referenced via the list from [`git status --numbered`](https://github.com/nickolasburr/git-extend/blob/master/templates/git-status#L19-L36). Index starts at `1`.
 
     ```
     git add %1
@@ -52,7 +52,7 @@ Template files are located in the [templates](https://github.com/nickolasburr/gi
     ```
 
 + **`git-merge`**
-  - `--trim`, `-T`: Delete the previous branch after a successful merge (if applicable).
+  - `--trim`, `-T`: Delete the previous branch after a successful merge (where applicable).
 
     ```
     git merge --no-ff --trim -
