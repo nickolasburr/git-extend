@@ -43,7 +43,7 @@ Hooks are great for certain actions, but are predetermined and, therefore, limit
 
 > Can I still use builtin options for the command?
 
-Absolutely, that's the point of `git-extend`. It can be thought of as a type of closure, providing _additional_ context.
+Absolutely, that's the point of `git-extend`. It can be viewed as a type of closure, providing _additional_ context.
 
 ## Installation
 
@@ -82,7 +82,7 @@ As an example, if the executable is located at `/usr/local/bin/git`, run:
 make build GITPREFIX=/usr/local
 ```
 
-If the executable is located at `/usr/bin/git`, then simply run `make`.
+If the executable is located at `/usr/bin/git`, simply run `make`.
 
 #### `make install`
 
