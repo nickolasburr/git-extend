@@ -55,8 +55,6 @@ brew tap nickolasburr/pfa
 brew install git-extend
 ```
 
-To minimize conflicts, the formula is [keg-only](https://docs.brew.sh/FAQ#what-does-keg-only-mean). Once installed, add `/usr/local/opt/git-extend/bin` to your `PATH`.
-
 ## Manual
 
 ```
@@ -127,7 +125,7 @@ Below are important caveats and considerations to think about prior to installat
 
 **Homebrew Users**
 
-+ The `git-extend` formula is keg-only. Make sure to update your `PATH` accordingly.
++ The `git-extend` formula is [keg-only](https://docs.brew.sh/FAQ#what-does-keg-only-mean). Add `/usr/local/opt/git-extend/bin` to your `PATH`.
 + If Git is installed via Homebrew, `git-extend` will use it instead of the system version.
 
 ## Options
