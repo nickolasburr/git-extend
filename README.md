@@ -99,7 +99,7 @@ To install `git-extend` under an alternate prefix, pass `PREFIX` to `make instal
 
 ## Pitfalls
 
-Common pitfalls to be mindful of:
+Common installation pitfalls to be mindful of:
 
 + Installing `git-extend` to the same directory where `git` is installed. `git-extend` creates a symlink to `git`, so `GITPREFIX` and `PREFIX` cannot be the same.
 + Installing to a directory that is not writable by the user. It is **not recommended** to install using `sudo`, but instead to pick an alternate location owned by the user.
@@ -116,7 +116,7 @@ For more details on closures, see [Closures](#closures).
 
 Below are important caveats and considerations to think about prior to installation:
 
-+ Use `git-extend` judiciously. It's lightweight but powerful.
++ Use `git-extend` judiciously. It's intended to be lightweight enough you forget it's there.
 + When in doubt, use `--bypass`. It's equivalent to invoking `git` directly. See [Examples](#examples) for usage.
 + Prefer Interrogators over Manipulators.
 + When building command closures:
@@ -124,6 +124,11 @@ Below are important caveats and considerations to think about prior to installat
   - Invoke `$GIT`, not `git`. The `GIT` export includes git(1) options and arguments (e.g. `git -C /path/to/repo ...`).
   - Give due diligence to user-defined options. **Don't add options defined by the builtin.**
   - **Always** test command closures somewhere safe before using them in your workflow.
+
+**Homebrew Users**
+
++ The `git-extend` formula is keg-only. Make sure to update your `PATH` accordingly.
++ If Git is installed via Homebrew, `git-extend` will use it instead of the system version.
 
 ## Options
 
