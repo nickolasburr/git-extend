@@ -43,7 +43,7 @@ Hooks are great for certain actions, but are predetermined and, therefore, limit
 
 > Can I still use builtin options for the command?
 
-Absolutely, that's the point of `git-extend`. It can be thought of as a type of closure, providing _additional_ context.
+Absolutely, that's the point of `git-extend`. It can be viewed as a type of closure, providing _additional_ context.
 
 ## Installation
 
@@ -82,7 +82,7 @@ As an example, if the executable is located at `/usr/local/bin/git`, run:
 make build GITPREFIX=/usr/local
 ```
 
-If the executable is located at `/usr/bin/git`, then simply run `make`.
+If the executable is located at `/usr/bin/git`, simply run `make`.
 
 #### `make install`
 
@@ -167,9 +167,13 @@ Below are important caveats and considerations to think about prior to installat
 
 ## Closures
 
-A command closure is an executable script that provides additional context when invoking a Git builtin. In order for `git-extend` to use a closure, the filename must correspond to the builtin. For example, `git-log` for `git log`, `git-add` for `git add`, and so on.
+A command closure is an executable script that provides additional context when invoking a Git builtin. In order for `git-extend` to use a closure, the file must be:
 
-While the aim is to augment existing commands, closures are not limited to builtins. You can create arbitrary Git commands using these conventions, and `git-extend` will handle accordingly.
++ Named to match the corresponding builtin (e.g. `git-log` for `git log`, `git-add` for `git add`, etc.)
++ Reachable from the `PATH` of the user
++ Executable
+
+To verify a command closure is usable, run `type -all git-<COMMAND>`, where `<COMMAND>` is the name of the corresponding Git command.
 
 Templates are provided for several porcelain commands, including:
 
@@ -183,6 +187,8 @@ Templates are provided for several porcelain commands, including:
 
 For a complete list of pre-built command closures, see [TEMPLATES](https://github.com/nickolasburr/git-extend/blob/master/TEMPLATES.md).
 
+While the aim is to augment existing commands, closures are not limited to builtins. In fact, you can create arbitrary Git commands with the conventions outlined above, and `git-extend` will handle accordingly.
+
 ## Notes
 
 1. The term _closure_ is used loosely in the context of `git-extend`. Think closure in terms of an executable as a function.
@@ -190,4 +196,4 @@ For a complete list of pre-built command closures, see [TEMPLATES](https://githu
 
 ## See Also
 
-[git(1)](https://git-scm.com/docs/git), [git-config](https://git-scm.com/docs/git-config)
+[git(1)](https://git-scm.com/docs/git), [git-config(1)](https://git-scm.com/docs/git-config)
