@@ -17,6 +17,7 @@
 - [Examples](#examples)
 - [Closures](#closures)
 - [Notes](#notes)
+- [See Also](#see-also)
 
 ## Description
 
@@ -42,7 +43,7 @@ Hooks are great for certain actions, but are predetermined and, therefore, limit
 
 > Can I still use builtin options for the command?
 
-Absolutely. That's the point of `git-extend`. It can be thought of as a type of closure, providing _additional_ options and functionality.
+Absolutely, that's the point of `git-extend`. It can be thought of as a type of closure, providing _additional_ context.
 
 ## Installation
 
@@ -186,3 +187,7 @@ For a complete list of pre-built command closures, see [TEMPLATES](https://githu
 
 1. The term _closure_ is used loosely in the context of `git-extend`. Think closure in terms of an executable as a function.
 2. A typical Git installation includes shell scripts, which may show when running `git extend --list`.
+
+## See Also
+
+[git(1)](https://git-scm.com/docs/git), [git-config](https://git-scm.com/docs/git-config)
