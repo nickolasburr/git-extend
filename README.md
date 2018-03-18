@@ -49,7 +49,7 @@ Absolutely, that's the point of `git-extend`. It can be viewed as a type of clos
 ## Installation
 
 <blockquote>
-<h3>Important: Please read the <a href="#caveats">Caveats</a> section before continuing.</h3>
+  <h4>Important: Please read the <a href="#caveats">Caveats</a> section before continuing.</h4>
 </blockquote>
 
 ## Homebrew
