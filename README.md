@@ -27,7 +27,7 @@
 
 > How is this different from using git-config variables?
 
-`git-config` variables are predetermined. `git-extend` augments Git builtins with options and functionality _you specify_.
+`git-config` variables are preselected. `git-extend` augments Git builtins with options and functionality _you specify_.
 
 > What advantages does git-extend provide that I can't get from git-config?
 
