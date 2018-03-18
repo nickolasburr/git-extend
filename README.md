@@ -147,7 +147,7 @@ Below are important caveats and considerations to think about prior to installat
     git branch --last
     ```
 
-2. Add the first pathspec in the list derived from [`git-status --numbered`](https://github.com/nickolasburr/git-extend/blob/master/templates/git-status#L19-L36) (see [`git-add`](https://github.com/nickolasburr/git-extend/blob/master/templates/git-add)).
+2. Add the first pathspec in the list derived from [`git status --numbered`](https://github.com/nickolasburr/git-extend/blob/master/templates/git-status#L19-L36) (see [`git-add`](https://github.com/nickolasburr/git-extend/blob/master/templates/git-add)).
 
     ```
     git add %1
@@ -174,7 +174,7 @@ A command closure is an executable script that provides additional context when 
 + Reachable from the `PATH` of the user
 + Executable
 
-To verify a command closure is usable, run `type -all git-<COMMAND>`, where `<COMMAND>` is the name of the corresponding Git command.
+To verify a command closure is usable, run `type -all git-<COMMAND>`.
 
 Templates are provided for several porcelain commands, including:
 
