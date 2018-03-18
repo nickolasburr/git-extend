@@ -31,7 +31,7 @@
 
 > What advantages does git-extend provide that I can't get from git-config?
 
-With `git-config`, you're confined to variables designated for the builtin. There is no builtin override, so the alternative is to define an alias.
+With `git-config`, you're confined to variables designated for the builtin. There is [no builtin override](http://git.661346.n2.nabble.com/allowing-aliases-to-override-builtins-to-support-default-options-td2438491.html), so the alternative is to define an alias.
 With `git-extend`, user-defined options and functionality wrap the builtin, providing convenient control over invocation context.
 
 > What advantages does git-extend provide that I can't get from a shell alias? Or a shell function?
