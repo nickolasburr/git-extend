@@ -25,7 +25,7 @@ while [[ $# -gt 0 ]]; do
 
 			exit 0
 		;;
-		--all|-a)
+		--all|-A)
 			shift
 
 			if [[ ! "$($GIT rev-parse --is-inside-work-tree)" ]] 2>/dev/null; then
@@ -38,7 +38,7 @@ while [[ $# -gt 0 ]]; do
 
 			ARGV+=("--max-count=$TOTAL")
 		;;
-		--last|-l)
+		--last)
 			shift
 
 			if [[ ! "$($GIT rev-parse --is-inside-work-tree)" ]] 2>/dev/null; then
