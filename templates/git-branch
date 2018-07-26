@@ -16,12 +16,12 @@ fi
 ARGV=()
 
 while [[ $# -gt 0 ]]; do
-	case $1 in
-		--last|-L)
-			git check-ref-format --branch @{-1} 2>/dev/null
+	case "$1" in
+		-L|--last)
+			$GIT check-ref-format --branch @{-1} 2>/dev/null
 
 			if [[ $? -gt 0 ]]; then
-				printf '%s\n' "$ERR_NO_PREV_BRANCH"
+				printf '%s: %s\n' "$0" "$ERR_NO_PREV_BRANCH"
 
 				exit 1
 			fi
@@ -36,4 +36,4 @@ while [[ $# -gt 0 ]]; do
 	esac
 done
 
-$GIT branch "${ARGV[@]}"
+exec $GIT branch "${ARGV[@]}"

@@ -10,17 +10,17 @@ ERR_NO_PREV_BRANCH="Unable to merge, no previous branch could be found."
 ARGV=()
 
 while [[ $# -gt 0 ]]; do
-	case $1 in
-		--help|-h)
-			$GIT merge --help
+	case "$1" in
+		-h|--help)
+			exec $GIT merge --help
 
 			exit 0
 		;;
-		--trim|-T)
+		-T|--trim)
 			shift
 
 			if [[ ! "$($GIT rev-parse --is-inside-work-tree)" ]] 2>/dev/null; then
-				echo "$ERR_NOTREPO"
+				printf '%s: %s\n' "$0" "$ERR_NOTREPO"
 
 				exit 1
 			fi
@@ -28,7 +28,7 @@ while [[ $# -gt 0 ]]; do
 			LASTBRANCH="$($GIT check-ref-format --branch @{-1} 2>/dev/null)"
 
 			if [[ $? -gt 0 ]]; then
-				echo "$ERR_NO_PREV_BRANCH"
+				printf '%s: %s\n' "$0" "$ERR_NO_PREV_BRANCH"
 
 				exit 1
 			fi
@@ -42,7 +42,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 if [[ ! "$($GIT rev-parse --is-inside-work-tree)" ]] 2>/dev/null; then
-	echo "$ERR_NOTREPO"
+	printf '%s: %s\n' "$0" "$ERR_NOTREPO"
 
 	exit 1
 fi
@@ -50,9 +50,10 @@ fi
 $GIT merge "${ARGV[@]}"
 
 # On a successful merge where --trim was specified and a previous branch (ref) exists.
-if [[ $? -eq 0 ]] && [[ -n "$LASTBRANCH" ]]; then
+if [[ $? -eq 0 ]] && \
+   [[ -n "$LASTBRANCH" ]]; then
 	$(echo $($GIT branch --list) | grep "$LASTBRANCH" >/dev/null 2>&1)
 
 	# If $LASTBRANCH is a valid, local branch, attempt soft delete.
-	[[ $? -eq 0 ]] && $GIT branch -d $LASTBRANCH
+	[[ $? -eq 0 ]] && exec $GIT branch -d $LASTBRANCH
 fi

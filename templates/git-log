@@ -20,16 +20,16 @@ ARGV=(
 
 while [[ $# -gt 0 ]]; do
 	case $1 in
-		--help|-h)
-			$GIT log --help
+		-h|--help)
+			exec $GIT log --help
 
 			exit 0
 		;;
-		--all|-A)
+		-A|--all)
 			shift
 
 			if [[ ! "$($GIT rev-parse --is-inside-work-tree)" ]] 2>/dev/null; then
-				printf '%s\n' "$ERR_NOTREPO"
+				printf '%s: %s\n' "$0" "$ERR_NOTREPO"
 
 				exit 1
 			fi
@@ -42,7 +42,7 @@ while [[ $# -gt 0 ]]; do
 			shift
 
 			if [[ ! "$($GIT rev-parse --is-inside-work-tree)" ]] 2>/dev/null; then
-				printf '%s\n' "$ERR_NOTREPO"
+				printf '%s: %s\n' "$0" "$ERR_NOTREPO"
 
 				exit 1
 			fi
@@ -66,9 +66,9 @@ while [[ $# -gt 0 ]]; do
 done
 
 if [[ ! "$($GIT rev-parse --is-inside-work-tree)" ]] 2>/dev/null; then
-	printf '%s\n' "$ERR_NOTREPO"
+	printf '%s: %s\n' "$0" "$ERR_NOTREPO"
 
 	exit 1
 fi
 
-$GIT log "${ARGV[@]}"
+exec $GIT log "${ARGV[@]}"

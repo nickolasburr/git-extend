@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+
+###
+### git-checkout: Add convenience options to git-checkout(1).
+###
+
+ERR_NOTREPO="Not a Git repository."
+
+if [[ ! "$($GIT rev-parse --is-inside-work-tree)" ]] 2>/dev/null; then
+	printf '%s\n' "$ERR_NOTREPO"
+
+	exit 1
+fi
+
+ARGV=()
+NEWBRANCH=0
+
+# Prefix used to denote branches. Used
+# when creating new branches with `-r`.
+PREFIX="t"
+STRLEN=8
+
+while [[ $# -gt 0 ]]; do
+	case "$1" in
+		# This is a built-in option, so all we're
+		# doing here is checking if it was given,
+		# then setting a flag to indicate if it was.
+		-b|-B)
+			NEWBRANCH=1
+
+			ARGV+=("$1")
+
+			shift
+		;;
+		-r|--random)
+			BRANCHNAME="$PREFIX/$(LC_CTYPE=C tr -dc a-f0-9 < /dev/urandom | head -c $STRLEN | xargs)"
+
+			shift
+		;;
+		*)
+			ARGV+=("$1")
+
+			shift
+		;;
+	esac
+done
+
+# If $BRANCHNAME is set, and we're creating
+# a new branch, checkout to generated branch.
+if [[ -n "$BRANCHNAME" ]] && \
+   [[ $NEWBRANCH -gt 0 ]]; then
+
+	# Checkout to new branch $BRANCHNAME.
+	exec $GIT checkout "${ARGV[@]}" "$BRANCHNAME"
+else
+	exec $GIT checkout "${ARGV[@]}"
+fi
