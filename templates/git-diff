@@ -4,6 +4,8 @@
 ### git-diff: Add convenience options to git-diff(1).
 ###
 
+ERR_NOTREPO="Not a Git repository."
+
 # Implicit options.
 ARGV=(
 	"--minimal"
@@ -11,8 +13,8 @@ ARGV=(
 
 while [[ $# -gt 0 ]]; do
 	case $1 in
-		--help|-h)
-			git diff --help
+		-h|--help)
+			exec $GIT diff --help
 
 			exit 0
 		;;
@@ -35,9 +37,9 @@ while [[ $# -gt 0 ]]; do
 done
 
 if [[ ! "$($GIT rev-parse --is-inside-work-tree)" ]] 2>/dev/null; then
-	echo "Not a Git repository."
+	printf '%s: %s\n' "$0" "$ERR_NOTREPO"
 
 	exit 1
 fi
 
-$GIT diff ${ARGV[@]}
+exec $GIT diff ${ARGV[@]}

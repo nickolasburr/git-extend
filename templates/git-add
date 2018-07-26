@@ -13,8 +13,8 @@ STAGEABLE=()
 
 while [[ $# -gt 0 ]]; do
 	case $1 in
-		--help|-h)
-			$GIT add --help
+		-h|--help)
+			exec $GIT add --help
 
 			exit 0
 		;;
@@ -32,15 +32,16 @@ while [[ $# -gt 0 ]]; do
 			INDEX="$1"
 
 			if [[ ! "$INDEX" =~ $REGEX ]]; then
-				printf 'Invalid format given for entry index.\n' "$INDEX"
+				printf '%s: %s is not a valid number.\n' "$0" "$INDEX"
 
 				exit 1
 			fi
 
 			INDEX="$(( $(echo $INDEX | tr -d '%') - 1 ))"
 
-			if [[ $INDEX -lt 0 ]] || [[ $(expr $INDEX + 1) -gt ${#STAGEABLE[@]} ]]; then
-				printf '%s is not a valid index.\n' "$(expr $INDEX + 1)"
+			if [[ $INDEX -lt 0 ]] || \
+			   [[ $(expr $INDEX + 1) -gt ${#STAGEABLE[@]} ]]; then
+				printf '%s: %s is not a valid index.\n' "$0" "$(expr $INDEX + 1)"
 
 				exit 1
 			fi
@@ -57,4 +58,4 @@ while [[ $# -gt 0 ]]; do
 	esac
 done
 
-$GIT add "${ARGV[@]}" "${FILES[@]}"
+exec $GIT add "${ARGV[@]}" "${FILES[@]}"
