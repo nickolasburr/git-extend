@@ -14,10 +14,6 @@ fi
 
 ARGV=()
 NEWBRANCH=0
-
-# Prefix used to denote branches. Used
-# when creating new branches with `-r`.
-PREFIX="t"
 STRLEN=8
 
 while [[ $# -gt 0 ]]; do
@@ -33,7 +29,14 @@ while [[ $# -gt 0 ]]; do
 			shift
 		;;
 		-r|--random)
-			BRANCHNAME="$PREFIX/$(LC_CTYPE=C tr -dc a-f0-9 < /dev/urandom | head -c $STRLEN | xargs)"
+			# Generic prefix used to denote branch refs.
+			PREFIX="t"
+
+			# Commit SHA to denote point of divergence.
+			COMMIT="$($GIT rev-parse --short=8 HEAD)"
+
+			# At last, a nicely crafted, meaningful branchname.
+			BRANCHNAME="$PREFIX/$COMMIT"
 
 			shift
 		;;
