@@ -4,6 +4,7 @@
 ### git-status: Add convenience options to git-status(1).
 ###
 
+BASENAME="$(basename $0)"
 ERR_NOTREPO="Not a Git repository."
 
 # Arguments, options.
@@ -16,7 +17,7 @@ while [[ $# -gt 0 ]]; do
 		;;
 		-N|--numbered)
 			if [[ ! "$($GIT rev-parse --is-inside-work-tree)" ]] 2>/dev/null; then
-				printf '%s: %s\n' "$0" "$ERR_NOTREPO"
+				printf '%s: %s\n' "$BASENAME" "$ERR_NOTREPO"
 
 				exit 1
 			fi
@@ -43,7 +44,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 if [[ ! "$($GIT rev-parse --is-inside-work-tree)" ]] 2>/dev/null; then
-	printf '%s: %s\n' "$0" "$ERR_NOTREPO"
+	printf '%s: %s\n' "$BASENAME" "$ERR_NOTREPO"
 
 	exit 1
 fi

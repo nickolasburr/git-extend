@@ -4,6 +4,7 @@
 ### git-add: Add convenience options to git-add(1).
 ###
 
+BASENAME="$(basename $0)"
 ERR_NOTREPO="Not a Git repository."
 
 ARGV=()
@@ -32,7 +33,7 @@ while [[ $# -gt 0 ]]; do
 			INDEX="$1"
 
 			if [[ ! "$INDEX" =~ $REGEX ]]; then
-				printf '%s: %s is not a valid number.\n' "$0" "$INDEX"
+				printf '%s: %s is not a valid number.\n' "$BASENAME" "$INDEX"
 
 				exit 1
 			fi
@@ -41,7 +42,7 @@ while [[ $# -gt 0 ]]; do
 
 			if [[ $INDEX -lt 0 ]] || \
 			   [[ $(expr $INDEX + 1) -gt ${#STAGEABLE[@]} ]]; then
-				printf '%s: %s is not a valid index.\n' "$0" "$(expr $INDEX + 1)"
+				printf '%s: %s is not a valid index.\n' "$BASENAME" "$(expr $INDEX + 1)"
 
 				exit 1
 			fi

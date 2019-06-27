@@ -4,10 +4,11 @@
 ### git-checkout: Add convenience options to git-checkout(1).
 ###
 
+BASENAME="$(basename $0)"
 ERR_NOTREPO="Not a Git repository."
 
 if [[ ! "$($GIT rev-parse --is-inside-work-tree)" ]] 2>/dev/null; then
-	printf '%s\n' "$ERR_NOTREPO"
+	printf '%s: %s\n' "$BASENAME" "$ERR_NOTREPO"
 
 	exit 1
 fi
