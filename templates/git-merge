@@ -4,6 +4,7 @@
 ### git-merge: Add convenience options to git-merge(1).
 ###
 
+BASENAME="$(basename $0)"
 ERR_NOTREPO="Not a Git repository."
 ERR_NO_PREV_BRANCH="Unable to merge, no previous branch could be found."
 
@@ -20,7 +21,7 @@ while [[ $# -gt 0 ]]; do
 			shift
 
 			if [[ ! "$($GIT rev-parse --is-inside-work-tree)" ]] 2>/dev/null; then
-				printf '%s: %s\n' "$0" "$ERR_NOTREPO"
+				printf '%s: %s\n' "$BASENAME" "$ERR_NOTREPO"
 
 				exit 1
 			fi
@@ -28,7 +29,7 @@ while [[ $# -gt 0 ]]; do
 			LASTBRANCH="$($GIT check-ref-format --branch @{-1} 2>/dev/null)"
 
 			if [[ $? -gt 0 ]]; then
-				printf '%s: %s\n' "$0" "$ERR_NO_PREV_BRANCH"
+				printf '%s: %s\n' "$BASENAME" "$ERR_NO_PREV_BRANCH"
 
 				exit 1
 			fi
@@ -42,7 +43,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 if [[ ! "$($GIT rev-parse --is-inside-work-tree)" ]] 2>/dev/null; then
-	printf '%s: %s\n' "$0" "$ERR_NOTREPO"
+	printf '%s: %s\n' "$BASENAME" "$ERR_NOTREPO"
 
 	exit 1
 fi

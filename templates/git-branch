@@ -4,6 +4,7 @@
 ### git-branch: Add convenience options to git-branch(1).
 ###
 
+BASENAME="$(basename $0)"
 ERR_NOTREPO="Not a Git repository."
 ERR_NO_PREV_BRANCH="No previous branch found."
 
@@ -21,7 +22,7 @@ while [[ $# -gt 0 ]]; do
 			$GIT check-ref-format --branch @{-1} 2>/dev/null
 
 			if [[ $? -gt 0 ]]; then
-				printf '%s: %s\n' "$0" "$ERR_NO_PREV_BRANCH"
+				printf '%s: %s\n' "$BASENAME" "$ERR_NO_PREV_BRANCH"
 
 				exit 1
 			fi
