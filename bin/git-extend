@@ -9,8 +9,8 @@ GITPREFIX="/usr"
 BINDIR="$GITPREFIX/bin"
 GIT="$BINDIR/git"
 ARGV=()
+VERSION="1.0.3"
 
-VERSION="1.0.2"
 read -r -d '' USAGE <<-EOS
   Usage: git extend [OPTIONS]
 
@@ -18,7 +18,7 @@ read -r -d '' USAGE <<-EOS
     --list,    -l: List all git-* executables found in PATH.
     --path,    -p: Get absolute path to git symlink.
     --help,    -h: Show usage information.
-    --version, -V: Show current version.
+    --version, -v: Show current version.
 EOS
 
 for ARG in "$@"; do
@@ -33,7 +33,7 @@ for ARG in "$@"; do
 
 					exit 0
 				;;
-				--version|-V)
+				--version|-v)
 					echo "$VERSION"
 
 					exit 0
