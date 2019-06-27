@@ -137,7 +137,7 @@ Below are important caveats and considerations to think about prior to installat
   - `--list`, `-l`: List all `git-*` executables found in `PATH`<sup>2</sup>.
   - `--path`, `-p`: Get absolute path to `git` symlink.
   - `--help`, `-h`: Show usage information.
-  - `--version`, `-V`: Show current version.
+  - `--version`, `-v`: Show current version.
 
 ## Examples
 
@@ -180,6 +180,7 @@ Templates are provided for several porcelain commands, including:
 
 + `git-add`
 + `git-branch`
++ `git-checkout`
 + `git-diff`
 + `git-log`
 + `git-merge`
