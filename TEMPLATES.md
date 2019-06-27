@@ -31,6 +31,13 @@ Template files are located in the [templates](https://github.com/nickolasburr/gi
     # -> fix/bug
     ```
 
++ **`git-checkout`**
+  - `-T`: Resolve `HEAD` to `<COMMIT_SHA>`, use `t/<COMMIT_SHA>` as branch name.
+
+    ```
+    git checkout -b -T
+    ```
+
 + **`git-diff`**
   - `--sxs`: Show side-by-side diff.
 
