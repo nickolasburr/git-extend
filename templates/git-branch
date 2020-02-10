@@ -29,6 +29,11 @@ while [[ $# -gt 0 ]]; do
 
 			exit 0
 		;;
+		--local)
+			shift
+
+			ARGV+=("--list")
+		;;
 		*)
 			ARGV+=("$1")
 
