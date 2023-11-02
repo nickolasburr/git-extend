@@ -4,24 +4,41 @@
 ### git-extend: Extend Git builtins with command wrappers.
 ###
 
-SCOPES="$(echo $PATH | tr ':' '\n')"
+WHICH="$(\which which)"
+BASENAME="$($WHICH basename)"
+FIND="$($WHICH find)"
+LS="$($WHICH ls)"
+TEST="$($WHICH test)"
+TR="$($WHICH tr)"
+
+PATHLIST="$(builtin echo $PATH | $TR ':' '\n')"
 GITPREFIX="/usr"
 BINDIR="$GITPREFIX/bin"
 GIT="$BINDIR/git"
 ARGV=()
+
+TAGDATE="2023-11-01"
 VERSION="1.0.3"
 
-read -r -d '' USAGE <<-EOS
+builtin read -r -d '' USAGE <<-EOS
+~ git-extend(1), version $VERSION [$TAGDATE]
+
   Usage: git extend [OPTIONS]
+         git-extend [OPTIONS]
 
   OPTIONS:
-    --list,    -l: List all git-* executables found in PATH.
-    --path,    -p: Get absolute path to git symlink.
-    --help,    -h: Show usage information.
-    --version, -v: Show current version.
+    -l, --list      List all git-* executables found in PATH.
+    -p, --path      Get absolute path to git symlink.
+    -h, --help      Show usage information.
+    -v, --version   Show git-extend(1) version.
 EOS
 
-for ARG in "$@"; do
+if [[ "$($BASENAME $0)" = "git-extend" ]] && \
+   [[ "$1" != "extend" ]]; then
+	set -- "extend" "${@:1}"
+fi
+
+for ARG in $@; do
 	case $ARG in
 		extend)
 			shift
@@ -29,30 +46,32 @@ for ARG in "$@"; do
 			# git-extend(1) specific options.
 			case $1 in
 				--help|-h)
-					echo "$USAGE"
-
+					builtin echo "$USAGE"
 					exit 0
 				;;
 				--version|-v)
-					echo "$VERSION"
-
+					builtin echo "$VERSION"
 					exit 0
 				;;
 				--list|-l)
-					for PATHNAME in ${SCOPES[@]}; do
-						find -L $PATHNAME -maxdepth 1 \( -type f -o -type l \) -name "git-*" -exec test -x {} \; -exec ls {} \; 2>/dev/null ;
+					for PATHNAME in ${PATHLIST[@]}; do
+						$FIND -L \
+						      "$PATHNAME" \
+						      -maxdepth 1 \
+						      \( -type f -o -type l \) \
+						      -name "git-*" \
+						      -exec $TEST -x {} \; \
+						      -exec $LS {} \; \
+						      2>/dev/null ;
 					done
-
 					exit 0
 				;;
 				--path|-p)
-					echo "${BASH_SOURCE[0]}"
-
+					builtin echo "${BASH_SOURCE[0]}"
 					exit 0
 				;;
 				*)
-					printf 'Invalid option %s\n' "$1"
-
+					builtin printf 'Invalid option %s\n' "$1"
 					exit 1
 				;;
 			esac
@@ -80,14 +99,13 @@ fi
 
 if [[ -n $BYPASS ]] && [[ $BYPASS -eq 1 ]]; then
 	exec $GIT "$@"
-
 	exit $?
 fi
 
 # Top-level PID.
 export TLPID="$$"
 
-for PATHNAME in ${SCOPES[@]}; do
+for PATHNAME in ${PATHLIST[@]}; do
 	ARGV=("$@")
 	COUNT=0
 
@@ -111,7 +129,6 @@ for PATHNAME in ${SCOPES[@]}; do
 
 			# Execute $TARGET with command-specific arguments only.
 			exec $TARGET "${ARGV[@]:1}"
-
 			exit $?
 		fi
 
